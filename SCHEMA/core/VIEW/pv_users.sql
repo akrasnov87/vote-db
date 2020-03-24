@@ -5,7 +5,6 @@ CREATE VIEW core.pv_users AS
     concat('.', string_agg(r.c_name, '.'::text), '.') AS c_claims,
     u.c_email,
     u.c_tel,
-    u.fn_file,
     u.c_description,
     u.c_firstname,
     u.c_lastname,

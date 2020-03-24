@@ -3,7 +3,6 @@ CREATE TABLE core.pd_users (
 	f_parent integer,
 	c_login text NOT NULL,
 	c_password text,
-	fn_file uuid,
 	s_salt text,
 	s_hash text,
 	c_firstname text,
@@ -28,8 +27,6 @@ COMMENT ON COLUMN core.pd_users.f_parent IS '[e140] Родитель';
 COMMENT ON COLUMN core.pd_users.c_login IS '[e130|d] Логин';
 
 COMMENT ON COLUMN core.pd_users.c_password IS '[e120] Пароль';
-
-COMMENT ON COLUMN core.pd_users.fn_file IS '[e110] Иконка';
 
 COMMENT ON COLUMN core.pd_users.s_salt IS '[e100] Salt';
 

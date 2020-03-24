@@ -1,3 +1,4 @@
+truncate dbo.ed_registr_pts CASCADE;
 truncate core.cd_points CASCADE;
 truncate core.cd_routes CASCADE;
 truncate core.cd_routes CASCADE;
@@ -62,74 +63,17 @@ insert into core.cd_points (id, f_registr_pts, f_route, c_notice, c_info, n_orde
 ('f85c3460-ce4a-42b0-aa5a-998da74c23ed', '7b1faaa7-4c63-42c2-817e-6893948fcadb', 'e7ded0cd-12dd-47f5-a75b-192376291e83', null, null, 6),
 ('c4fb7bda-e4c7-4b98-865f-32115dad480a', '99f6003e-2738-44f1-91c1-aa80ea30a69f', 'e7ded0cd-12dd-47f5-a75b-192376291e83', null, null, 7);
 
-insert into dbo.ed_input_meter_readings(id, f_point, n_value_prev, d_date_prev, f_time_zone) values
-('028d65a4-3621-408b-af0a-230242f41702', '89235ebf-64bd-4bbc-8feb-5e4ddd6684a9', 1100,  now(), 2),
-('0d7b1a9c-c0f1-4ac1-917f-7c3f0a367600', '4073b193-af8f-4371-85cf-fee220eb5b2d', 1190,  now(), 2),
-('30a5a027-17a2-4ce6-9e0a-124a487ebf26', '7f8d7a92-1c09-49da-b50a-5fa6bf1b57eb', 900,  now(), 2),
-('394fb071-7d9f-4c13-ada6-3c45b0f1643b', '017556ad-ef67-4149-8c67-1e0e973289ed', 750,  now(), 2),
-('5ce021b0-33ca-4d6e-8a7b-1e3989365712', '2b5c33da-bbde-4b12-82e5-bb80bc3da677', 2000,  now(), 2),
-('96181fcb-48d1-47d1-846a-b838a2776079', 'e9518202-ae4a-4ba8-8747-f3d3a9c85ae0', 1300,  now(), 2),
-('907e9a53-4f01-4800-bfa4-fbdfe1ee2d38', '39eff641-67f7-4099-bb11-1b794ee99acb', 1395,  now(), 2),
-('ad49816a-dfb7-4b3b-bd95-52b1a3c68bde', '3c47fef3-9f5b-4ddf-8035-7ea87fcc85d0', 526,  now(), 2),
-('05659880-f43c-43fe-a35d-ce1222ab7497', '1704e09d-d28c-4ae0-b8b1-cc51836a5a5e', 9865,  now(), 2),
-('22ca7490-718d-4afe-a994-7b82b057b9b5', 'b699a359-5c91-4f7d-a483-ae9bf1e8cf64', 4215,  now(), 3),
-('c285c0a3-977f-44bc-bacd-40dbac07cbe7', 'b104c9eb-021a-4fd8-9b46-bae5d318d2ac', 82131,  now(), 2),
-('82b7238d-5fb5-451a-9d5f-208236e8129c', 'f4f95bc1-a15b-47a9-9cb2-27b5791fa0da', 789,  now(), 2),
-('699dd388-a94b-4bff-97c3-cc70edf9f30c', '2d7c95a1-9da3-4af2-b90a-608573f4116a', 12,  now(), 2),
-('ff4ccf93-a023-4114-a1f4-266d52d10329', 'f85c3460-ce4a-42b0-aa5a-998da74c23ed', 5,  now(), 2),
-('626dae11-8775-47ed-a419-a6e92d2dad0a', 'c4fb7bda-e4c7-4b98-865f-32115dad480a', 836,  now(), 2);
-
 truncate core.cd_user_points;
 insert into core.cd_user_points(id, fn_point, fn_type, jb_tel, jb_email, fn_user, fn_route, n_latitude, n_longitude, d_date, c_notice, b_check, d_date_check) values
 ('547c39bd-d171-4cae-bf64-c30fae16210a', '89235ebf-64bd-4bbc-8feb-5e4ddd6684a9', 1, null, null, 4, '60d6269b-c60c-4542-9b0e-8c65768cbbae', '56.14010705859811', '47.229393446807734', '2019-08-30T00:00:00.511Z', '', false, null),
 ('1a29d44d-5f31-49f0-a4d5-8056b1d307a6', '4073b193-af8f-4371-85cf-fee220eb5b2d', 1, null, null, 4, 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', '56.14010705859811', '47.229393446807734', '2019-08-30T00:00:00.511Z', '', false, null),
 ('7f8d7a92-1c09-49da-b50a-5fa6bf1b57eb', '017556ad-ef67-4149-8c67-1e0e973289ed', 1, null, null, 4, 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', '56.14098311929222', '47.22885164058674', '2019-08-30T00:00:00.511Z', '', false, null);
 
-truncate dbo.ed_output_meter_readings;
-insert into dbo.ed_output_meter_readings(fn_meter_reading, fn_user_point, fn_result, fn_point, fn_route, n_value, d_date) values
-('028d65a4-3621-408b-af0a-230242f41702', '547c39bd-d171-4cae-bf64-c30fae16210a', null, '89235ebf-64bd-4bbc-8feb-5e4ddd6684a9', '60d6269b-c60c-4542-9b0e-8c65768cbbae', 1190, '2019-04-30T00:00:00.511Z'),
-('0d7b1a9c-c0f1-4ac1-917f-7c3f0a367600', '1a29d44d-5f31-49f0-a4d5-8056b1d307a6', null, '4073b193-af8f-4371-85cf-fee220eb5b2d', 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', 1300, '2019-08-30T00:00:00.511Z'),
-('394fb071-7d9f-4c13-ada6-3c45b0f1643b', '7f8d7a92-1c09-49da-b50a-5fa6bf1b57eb', null, '017556ad-ef67-4149-8c67-1e0e973289ed', 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', 45913, '2019-08-30T00:00:00.511Z');
-
 truncate core.cd_results;
 insert into core.cd_results (id, fn_user_point, fn_point, fn_type, fn_user, fn_route, d_date, c_notice, b_warning) values
 ('7d307748-499a-4932-ac83-830c93edc7cf', '547c39bd-d171-4cae-bf64-c30fae16210a', '89235ebf-64bd-4bbc-8feb-5e4ddd6684a9', 1, 4, '60d6269b-c60c-4542-9b0e-8c65768cbbae', '2019-08-30T00:00:00.511Z', 'акт сформирован', false),
 ('89d0cba6-0b33-42df-8c9b-c3789cc4c4c0', '1a29d44d-5f31-49f0-a4d5-8056b1d307a6', '4073b193-af8f-4371-85cf-fee220eb5b2d', 1, 4, 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', '2019-08-30T00:00:00.511Z', 'неадекватный хозяин', false),
 ('6812dd61-064c-4c5e-b8ba-dfdb91d6a7de', '7f8d7a92-1c09-49da-b50a-5fa6bf1b57eb', '017556ad-ef67-4149-8c67-1e0e973289ed', 1, 4, 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', '2019-08-30T00:00:00.511Z', null, true);
-
-truncate core.cd_files;
--- смотри папку /var/lib/postgresql/[version]/main/pg_simple_data
--- https://github.com/akrasnov87/simple-data
-insert into core.cd_files (id, c_name, d_date, c_mime, ba_data, c_extension, n_size) values
-('dc1beca9-1b8b-4078-be1a-3261ba0c94e0', 'doc1.jpg', '2019-08-31T00:00:00.511Z', 'image/jpeg', pg_read_binary_file('pg_simple_data/doc1.jpg'), '.jpg', 40960),
-('991e2342-0d76-426f-bc95-21a99cf700a2', 'icon.jpg', '2019-08-31T00:00:00.511Z', 'image/jpeg', pg_read_binary_file('pg_simple_data/icon.jpg'), '.jpg', 28672),
-('f9bba6d8-4cfb-48aa-bed7-794bddb2d7dd', 'doc1.jpg', '2019-08-31T10:00:00.511Z', 'image/jpeg', pg_read_binary_file('pg_simple_data/doc1.jpg'), '.jpg', 40960),
-('eb895925-39e8-4ee7-9ad9-507a0031afba', 'doc2.jpg', '2019-08-30T00:00:00.511Z', 'image/jpeg', pg_read_binary_file('pg_simple_data/doc2.jpg'), '.jpg', 233472),
-('fe917dcf-3d47-4af4-870c-8d34632dbb5f', 'pic2.jpg', '2019-08-31T00:00:00.511Z', 'image/jpeg', pg_read_binary_file('pg_simple_data/pic2.jpg'), '.jpg', 40960);
-
---('44370453-64ae-4138-b220-a8fd0645f1d0', 'sample_audio.mp3', '2019-08-30T00:00:00.511Z', 'audio/mpeg', pg_read_binary_file('pg_simple_data/sample_audio.mp3'), '.mp3', 442368),
---('fe852cc5-935b-4a2c-88d6-16d92cfdfec1', 'sample_video.mp4', '2019-08-30T00:00:00.511Z', 'video/mp4', pg_read_binary_file('pg_simple_data/sample_video.mp4'), '.mp4', 5251072),
-
-truncate core.cd_attachments;
-insert into core.cd_attachments (id, fn_result, fn_route, fn_type, n_latitude, n_longitude, d_date, c_notice, fn_file) values
-('82fda821-601d-4499-aa23-adcbc2e6c01e', '7d307748-499a-4932-ac83-830c93edc7cf', '60d6269b-c60c-4542-9b0e-8c65768cbbae', 2, '56.14010705859811', '47.229393446807734', '2019-08-31T00:00:00.511Z', 'это документ', 'dc1beca9-1b8b-4078-be1a-3261ba0c94e0'),
-('b5acd5fc-046d-4abb-a64b-d6bb70793527', '89d0cba6-0b33-42df-8c9b-c3789cc4c4c0', 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', 1, '56.14010705859811', '47.229393446807734', '2019-08-31T00:00:00.511Z', 'это изображение', '991e2342-0d76-426f-bc95-21a99cf700a2'),
-('c29da08c-7478-427e-8c15-9da924812689', '89d0cba6-0b33-42df-8c9b-c3789cc4c4c0', 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', 2, '56.14010705859811', '47.229393446807734', '2019-08-31T10:00:00.511Z', 'это документ', 'f9bba6d8-4cfb-48aa-bed7-794bddb2d7dd'),
-('f57a1625-a57d-4825-b3d3-86a475d5ab6d', '6812dd61-064c-4c5e-b8ba-dfdb91d6a7de', 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', 2, '56.14098311929222', '47.22885164058674', '2019-08-30T00:00:00.511Z', 'это документ...', 'eb895925-39e8-4ee7-9ad9-507a0031afba'),
-('d53d5a20-9587-488a-b2ca-a192989d4a8d', '6812dd61-064c-4c5e-b8ba-dfdb91d6a7de', 'c68b1a77-0a13-4c05-bc3e-c2504868f0ac', 1, '56.14010705859811', '47.229393446807734', '2019-08-31T10:00:00.511Z', 'это изображение...', 'fe917dcf-3d47-4af4-870c-8d34632dbb5f');
-
-truncate core.cd_notifications;
-insert into core.cd_notifications (fn_user_to, c_title, c_message, d_date, fn_user_from, b_readed, b_sended) values
-(4, 'Приветствие!', 'Добро пожаловать в Мобильные сервисы', '2019-08-30T00:00:00.511Z', 2, false, false),
-(5, 'Приветствие!', 'Добро пожаловать в Мобильные сервисы', '2019-08-30T00:00:00.511Z', 2, false, false);
-
-truncate core.cd_feedbacks;
-insert into core.cd_feedbacks (id, c_imei, fn_user, fn_type, c_question, d_date_question, fn_question_file, c_answer, d_date_answer, fn_answer_file) values
-('15311408-da0a-4c2a-90c1-91038785577f', '351756051523999', 4, 2, 'Хочу видео вложение, а не фото.', '2019-10-28T00:00:00.511Z', '4a6d72fd-8c34-4c54-9d24-a39d9dc7a5ef', '<font color=''green''>будет</font>', '2019-10-29T00:00:00.511Z', '95359ae4-8e6e-44ad-bc98-6bae613eeb7d');
-
-update core.pd_users
-set fn_file = '697167b7-b5af-4578-839f-6ebbd4e24663'
-where id = 4;
 
 truncate core.ad_tracking;
 insert into core.ad_tracking (id, fn_user, d_date, n_latitude, n_longitude, c_network_status) values
