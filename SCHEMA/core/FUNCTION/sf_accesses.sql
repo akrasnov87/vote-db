@@ -1,0 +1,21 @@
+CREATE OR REPLACE FUNCTION core.sf_accesses(c_role_name text, n_currentuser integer, c_claims text, n_user_id integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF c_role_name is null and n_user_id is null then
+		RETURN 1;
+	ELSEIF (c_role_name is not null and c_claims is not null and POSITION(CONCAT('.', c_role_name, '.') IN c_claims) > 0) then
+		RETURN 2;
+	ELSEIF (c_role_name is not null and c_claims is not null and POSITION(CONCAT('.', c_role_name, '.') IN c_claims) > 0) then  
+		RETURN 3;
+	ELSEIF (c_role_name is null and n_currentuser = n_user_id) then
+        RETURN 4;
+    ELSEIF (c_role_name = 'anonymous' or n_user_id = -1) then
+		RETURN 5;
+	else
+		RETURN 0;
+	end if;
+ END
+$$;
+
+ALTER FUNCTION core.sf_accesses(c_role_name text, n_currentuser integer, c_claims text, n_user_id integer) OWNER TO mobnius;

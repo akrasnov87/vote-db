@@ -1,0 +1,5 @@
+CREATE SCHEMA public;
+
+ALTER SCHEMA public OWNER TO mobnius;
+
+GRANT ALL ON SCHEMA public TO PUBLIC;
