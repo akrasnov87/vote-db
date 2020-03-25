@@ -8,6 +8,8 @@ CREATE TABLE core.cd_results (
 	d_date timestamp with time zone NOT NULL,
 	c_notice text,
 	b_warning boolean NOT NULL DEFAULT false,
+	f_question integer,
+	f_answer integer,
 	jb_data jsonb,
 	dx_created timestamp with time zone DEFAULT now()
 );
@@ -33,6 +35,10 @@ COMMENT ON COLUMN core.cd_results.d_date IS '[e50] Дата создания';
 COMMENT ON COLUMN core.cd_results.c_notice IS '[e40] Примечание';
 
 COMMENT ON COLUMN core.cd_results.b_warning IS '[e30] Предупреждение';
+
+COMMENT ON COLUMN core.cd_results.f_question IS '[e30] Вопрос';
+
+COMMENT ON COLUMN core.cd_results.f_answer IS '[e30] Ответ';
 
 COMMENT ON COLUMN core.cd_results.jb_data IS '[e20] JSON данные';
 
