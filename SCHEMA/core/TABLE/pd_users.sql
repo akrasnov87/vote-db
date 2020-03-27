@@ -12,8 +12,9 @@ CREATE TABLE core.pd_users (
 	c_tel text,
 	c_imei text,
 	c_description text,
-	b_disabled boolean NOT NULL DEFAULT false,
-	sn_delete boolean NOT NULL DEFAULT false
+	b_disabled boolean DEFAULT false NOT NULL,
+	sn_delete boolean DEFAULT false NOT NULL,
+	n_uik bigint
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;
@@ -49,6 +50,8 @@ COMMENT ON COLUMN core.pd_users.c_description IS '[e30] Описание';
 COMMENT ON COLUMN core.pd_users.b_disabled IS '[e20] Отключен';
 
 COMMENT ON COLUMN core.pd_users.sn_delete IS '[e10] Удален';
+
+COMMENT ON COLUMN core.pd_users.n_uik IS '[e0] УИК';
 
 --------------------------------------------------------------------------------
 

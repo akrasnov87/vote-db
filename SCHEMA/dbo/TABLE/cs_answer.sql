@@ -4,10 +4,11 @@ CREATE TABLE dbo.cs_answer (
 	f_question integer NOT NULL,
 	f_next_question integer,
 	c_action text,
-	n_order integer NOT NULL DEFAULT 0,
-	b_disabled boolean NOT NULL DEFAULT false,
+	n_order integer DEFAULT 0 NOT NULL,
+	b_disabled boolean DEFAULT false NOT NULL,
 	dx_created timestamp with time zone DEFAULT now(),
-	sn_delete boolean NOT NULL DEFAULT false
+	sn_delete boolean DEFAULT false NOT NULL,
+	c_color text
 );
 
 ALTER TABLE dbo.cs_answer OWNER TO mobnius;
@@ -32,11 +33,8 @@ COMMENT ON COLUMN dbo.cs_answer.dx_created IS '[e20] Дата создания';
 
 COMMENT ON COLUMN dbo.cs_answer.sn_delete IS '[e10] Признак удаленной записи';
 
---------------------------------------------------------------------------------
+COMMENT ON COLUMN dbo.cs_answer.c_color IS '[e05] Цвет';
 
-ALTER TABLE dbo.cs_answer
-	ADD CONSTRAINT cs_answer_pkey PRIMARY KEY (id);
-	
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER cs_answer_trigger
@@ -47,8 +45,13 @@ CREATE TRIGGER cs_answer_trigger
 --------------------------------------------------------------------------------
 
 ALTER TABLE dbo.cs_answer
+	ADD CONSTRAINT cs_answer_pkey PRIMARY KEY (id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_answer
 	ADD CONSTRAINT cs_answer_f_question_fkey FOREIGN KEY (f_question) REFERENCES dbo.cs_question(id);
-	
+
 --------------------------------------------------------------------------------
 
 ALTER TABLE dbo.cs_answer
