@@ -28,7 +28,7 @@ COMMENT ON COLUMN dbo.cs_uik.c_phone IS '[e70] Телефон';
 
 COMMENT ON COLUMN dbo.cs_uik.n_count IS '[60] Количество избирателей';
 
-COMMENT ON COLUMN dbo.cs_uik.c_boundary IS '[50] Адрес УИК';
+COMMENT ON COLUMN dbo.cs_uik.c_boundary IS '[50] Границы УИК';
 
 COMMENT ON COLUMN dbo.cs_uik.dx_created IS '[e20] Дата создания';
 

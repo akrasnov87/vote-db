@@ -15,10 +15,8 @@ CREATE TABLE core.pd_users (
 	b_disabled boolean DEFAULT false NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
 	f_uik bigint,
-	c_area text,
-	n_area text,
 	c_work text,
-	"с_post" text
+	c_post text
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;
@@ -59,7 +57,7 @@ COMMENT ON COLUMN core.pd_users.f_uik IS '[e0] УИК';
 
 COMMENT ON COLUMN core.pd_users.c_work IS 'Место работы волонтера';
 
-COMMENT ON COLUMN core.pd_users."с_post" IS 'Должность';
+COMMENT ON COLUMN core.pd_users.c_post IS 'Должность';
 
 --------------------------------------------------------------------------------
 
