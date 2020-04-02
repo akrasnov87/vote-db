@@ -14,7 +14,11 @@ CREATE TABLE core.pd_users (
 	c_description text,
 	b_disabled boolean DEFAULT false NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
-	n_uik bigint
+	f_uik bigint,
+	c_area text,
+	n_area text,
+	c_work text,
+	"с_post" text
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;
@@ -23,7 +27,7 @@ COMMENT ON TABLE core.pd_users IS 'Пользователи';
 
 COMMENT ON COLUMN core.pd_users.id IS '[e150] Идентификатор';
 
-COMMENT ON COLUMN core.pd_users.f_parent IS '[e140] Родитель';
+COMMENT ON COLUMN core.pd_users.f_parent IS '[e140] Ответственный за УИК';
 
 COMMENT ON COLUMN core.pd_users.c_login IS '[e130|d] Логин';
 
@@ -51,7 +55,11 @@ COMMENT ON COLUMN core.pd_users.b_disabled IS '[e20] Отключен';
 
 COMMENT ON COLUMN core.pd_users.sn_delete IS '[e10] Удален';
 
-COMMENT ON COLUMN core.pd_users.n_uik IS '[e0] УИК';
+COMMENT ON COLUMN core.pd_users.f_uik IS '[e0] УИК';
+
+COMMENT ON COLUMN core.pd_users.c_work IS 'Место работы волонтера';
+
+COMMENT ON COLUMN core.pd_users."с_post" IS 'Должность';
 
 --------------------------------------------------------------------------------
 
@@ -74,3 +82,8 @@ ALTER TABLE core.pd_users
 
 ALTER TABLE core.pd_users
 	ADD CONSTRAINT pd_users_f_parent_fkey FOREIGN KEY (f_parent) REFERENCES core.pd_users(id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE core.pd_users
+	ADD CONSTRAINT pd_users_f_uik_fkey FOREIGN KEY (f_uik) REFERENCES dbo.cs_uik(id) NOT VALID;
