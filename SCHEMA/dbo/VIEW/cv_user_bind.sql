@@ -21,7 +21,7 @@ CREATE VIEW dbo.cv_user_bind AS
             min(a.n_number) AS min_number,
             max(a.n_number) AS max_number,
             count(a.n_number) AS count_number
-           FROM dbo.cs_apartament a
+           FROM dbo.cs_appartament a
           WHERE (a.f_user IS NOT NULL)
           GROUP BY a.f_user, a.f_house) t
      JOIN dbo.cs_house h ON ((h.id = t.f_house)))

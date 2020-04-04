@@ -13,7 +13,7 @@ BEGIN
 	
 	-- создать маршрут
 	insert into core.cd_routes(id, f_type, c_number, d_date, d_date_start, d_date_end, b_extended, c_notice, n_order)
-	values (_route_id, _route_type_id, _route_number, now(), _date_activate, '2020-12-31', false, concat('M', _route_type_id, '-', _user_id, '-', date_part('month', now()), date_part('day', now())), -1);
+	values (_route_id, _route_type_id, _route_number, now(), _date_activate, '2020-12-31', false, concat('M', _route_type_id, '-', _user_id, '-', date_part('month', now()), date_part('day', now())), _route_type_id);
 
 	-- привязать маршрут к пользователю
 	insert into core.cd_userinroutes(f_route, f_user, b_main)
