@@ -7,7 +7,7 @@ BEGIN
 	delete from dbo.ed_registr_pts
 	where f_subdivision is null;
 
-	insert into dbo.ed_registr_pts (id, c_subscr, c_device, c_address, n_longitude, n_latitude, f_user, f_division, b_disabled)
+	insert into dbo.ed_registr_pts (id, c_subscr, c_device, c_address, n_longitude, n_latitude, f_division, b_disabled)
 	select 
 		a.id, 
 		a.c_number, 
@@ -15,13 +15,11 @@ BEGIN
 		s.c_name,
 		h.n_longitude,
 		h.n_latitude,
-		a.f_user,
 		1,
 		false
 	from dbo.cs_apartament as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
-	inner join dbo.cs_street as s ON h.f_street = s.id
-	where a.f_user is not null;
+	inner join dbo.cs_street as s ON h.f_street = s.id;
 	
 	_result = 0;
 	RETURN _result;

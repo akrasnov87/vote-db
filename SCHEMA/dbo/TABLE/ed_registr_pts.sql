@@ -8,13 +8,13 @@ CREATE TABLE dbo.ed_registr_pts (
 	c_fio text,
 	n_longitude numeric(20,15) NOT NULL,
 	n_latitude numeric(20,15) NOT NULL,
-	f_user integer NOT NULL,
+	f_user integer,
 	f_division integer NOT NULL,
 	f_subdivision integer,
-    b_disabled boolean NOT NULL DEFAULT false,
-    gx_geodata public.geography,
+	b_disabled boolean DEFAULT false NOT NULL,
+	gx_geodata public.geography,
 	dx_created timestamp with time zone DEFAULT now(),
-	sn_delete boolean NOT NULL DEFAULT false
+	sn_delete boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE dbo.ed_registr_pts OWNER TO mobnius;
@@ -55,11 +55,6 @@ COMMENT ON COLUMN dbo.ed_registr_pts.sn_delete IS '[e10] Признак удал
 
 --------------------------------------------------------------------------------
 
-ALTER TABLE dbo.ed_registr_pts
-	ADD CONSTRAINT ed_registr_pts_pkey PRIMARY KEY (id);
-	
---------------------------------------------------------------------------------
-
 CREATE TRIGGER ed_registr_pts_coordinates_trigger_iu
 	BEFORE INSERT OR UPDATE ON dbo.ed_registr_pts
 	FOR EACH ROW
@@ -71,6 +66,11 @@ CREATE TRIGGER ed_registr_pts_trigger
 	BEFORE INSERT OR UPDATE OR DELETE ON dbo.ed_registr_pts
 	FOR EACH ROW
 	EXECUTE PROCEDURE core.cft_0_log_action();
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.ed_registr_pts
+	ADD CONSTRAINT ed_registr_pts_pkey PRIMARY KEY (id);
 
 --------------------------------------------------------------------------------
 

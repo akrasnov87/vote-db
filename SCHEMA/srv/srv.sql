@@ -1,0 +1,5 @@
+CREATE SCHEMA srv;
+
+ALTER SCHEMA srv OWNER TO mobnius;
+
+COMMENT ON SCHEMA srv IS 'Сервисы';
