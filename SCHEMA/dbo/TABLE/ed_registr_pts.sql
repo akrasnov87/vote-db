@@ -1,7 +1,9 @@
 CREATE TABLE dbo.ed_registr_pts (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-	c_subscr text,
-	c_device text,
+	c_appartament_num text, 
+	n_appartament_num integer,
+	c_house_num text,
+	n_house_num integer,
 	jb_tel jsonb,
 	jb_email jsonb,
 	c_address text NOT NULL,
@@ -21,11 +23,15 @@ ALTER TABLE dbo.ed_registr_pts OWNER TO mobnius;
 
 COMMENT ON TABLE dbo.ed_registr_pts IS 'Учетный показатель';
 
-COMMENT ON COLUMN dbo.ed_registr_pts.id IS '[e160] Идентификатор';
+COMMENT ON COLUMN dbo.ed_registr_pts.id IS '[e180] Идентификатор';
 
-COMMENT ON COLUMN dbo.ed_registr_pts.c_subscr IS '[e150] Номер ЛС';
+COMMENT ON COLUMN dbo.ed_registr_pts.c_appartament_num IS '[e170] Номер квартиры (строковая)';
 
-COMMENT ON COLUMN dbo.ed_registr_pts.c_device IS '[e140] Номер ПУ';
+COMMENT ON COLUMN dbo.ed_registr_pts.n_appartament_num IS '[e160] Номер квартиры';
+
+COMMENT ON COLUMN dbo.ed_registr_pts.c_house_num IS '[e150] Номер дома (строковая)';
+
+COMMENT ON COLUMN dbo.ed_registr_pts.n_house_num IS '[e140] Номер дома';
 
 COMMENT ON COLUMN dbo.ed_registr_pts.jb_tel IS '[e130] Номер телефона';
 

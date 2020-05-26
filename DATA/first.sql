@@ -64,14 +64,9 @@ insert into core.sd_subdivisions (f_division, n_code, c_name, b_disabled) values
 (5, '0001', 'Отделение 1', false), -- 1
 (6, '0002', 'Отделение 2', false); -- 2
 
-insert into core.sd_ui_actions (id, c_view_id, c_text, c_icon, c_operation, c_action_view, c_xtype, c_place, n_sort, c_tooltip, c_ui, f_parent, c_selectiondependencytype, c_confirmationmessage, c_javascript_fn, sn_delete) values 
-(1, 'pd_users-detailview', 'Генерация пароля', 'x-fa fa-user-secret', 'PN.shell.saltHash();', 'password-generade', 'actionoperationbutton', 'BEFORE_ACTIONS', null, 'Генерация пароля средствами salt&hash', null, null, null, null, null, false),
-(2, 'pd_users-detailview', 'Удаление пользователя', 'x-fa fa-trash', 'PN.shell.removeUser();', null, 'operationbutton', 'BEFORE_ACTIONS', null, 'Удаление пользователя', null, null, null, null, '(function(e, callback){callback({meta:{success:true,msg: "Пользователь удален"}});e.util.redirect("pd_users-listview");});', false);
-
 -- роль master
 insert into core.pd_accesses (f_role, c_name, b_deletable, b_creatable, b_editable, b_full_control, sn_delete) values 
 (1, 'sd_ui_criteries', true, true, true, true, false),
-(1, 'sd_ui_actions', true, true, true, true, false),
 (1, 'pd_navigations', true, true, true, true, false),
 (1, 'sd_digests', true, true, true, true, false),
 (1, 'pd_accesses', true, true, true, true, false),
@@ -188,8 +183,6 @@ false, 7, false, false), --4
 true, NULL, false, false, 90, false, false), --5
 ('pd_navigations-listview', 'pd_navigations', true, 'x-fa fa-bars', 5, 'Навигация', true, 'NAVIGATION', true, NULL,
 false, false, 10, false, false), --6
-('sd_ui_actions-listview', 'sd_ui_actions', true, 'x-fa fa-building', 5, 'Действия', false, 'NAVIGATION', true, NULL,
-false, false, 9, false, false), --7
 ('cd_settings-listview', 'cd_settings', true, 'x-fa fa-cogs', 5, 'Настройки', false, 'NAVIGATION', true, NULL, false,
 false, 8, false, false), --8
 ('sd_digests-listview', 'sd_digests', true, 'x-fa fa-book', 5, 'Журнал версий', false, 'NAVIGATION', true, NULL, false,
