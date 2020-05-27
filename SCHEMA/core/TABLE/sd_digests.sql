@@ -4,7 +4,8 @@ CREATE TABLE core.sd_digests (
 	c_description text NOT NULL,
 	f_division integer,
 	c_app_name text NOT NULL,
-	b_hidden boolean NOT NULL DEFAULT false
+	b_hidden boolean NOT NULL DEFAULT false,
+	ba_file bytea NOT NULL
 );
 
 ALTER TABLE core.sd_digests OWNER TO mobnius;
@@ -22,6 +23,8 @@ COMMENT ON COLUMN core.sd_digests.f_division IS '[e30] Отделение';
 COMMENT ON COLUMN core.sd_digests.c_app_name IS '[e20] Имя приложения';
 
 COMMENT ON COLUMN core.sd_digests.b_hidden IS '[e10] Скрыт';
+
+COMMENT ON COLUMN core.sd_digests.ba_file IS '[e05] Файл для обновления';
 
 --------------------------------------------------------------------------------
 
