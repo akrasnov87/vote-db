@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION core.pf_accesses(n_user_id integer) RETURNS TABLE(ope
     LANGUAGE plpgsql
     AS $$BEGIN
  RETURN QUERY select 
-        ac.c_operation,
+        '' as c_operation,
         a.c_name,
         a.c_criteria,
         a.c_path,
@@ -14,7 +14,6 @@ CREATE OR REPLACE FUNCTION core.pf_accesses(n_user_id integer) RETURNS TABLE(ope
         a.b_full_control, 
         core.sf_accesses(r.c_name, u.id, u.c_claims, a.f_user) as access 
     from core.pd_accesses as a
-    left join core.sd_ui_actions as ac on a.f_action = ac.id
     left join core.sv_users as u on n_user_id = u.id
     left join core.pd_roles as r on a.f_role = r.id
     where a.sn_delete = false;

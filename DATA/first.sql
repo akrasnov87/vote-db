@@ -66,8 +66,6 @@ insert into core.sd_subdivisions (f_division, n_code, c_name, b_disabled) values
 
 -- роль master
 insert into core.pd_accesses (f_role, c_name, b_deletable, b_creatable, b_editable, b_full_control, sn_delete) values 
-(1, 'sd_ui_criteries', true, true, true, true, false),
-(1, 'pd_navigations', true, true, true, true, false),
 (1, 'sd_digests', true, true, true, true, false),
 (1, 'pd_accesses', true, true, true, true, false),
 (1, 'cd_sys_log', false, false, false, false, false),
@@ -149,64 +147,18 @@ insert into core.pd_accesses (f_role, c_name, b_deletable, b_creatable, b_editab
 
 -- общие
 insert into core.pd_accesses (c_name, b_deletable, b_creatable, b_editable, b_full_control, sn_delete) values 
-('cd_settings', false, false, false, false, false),
-('pf_stores', false, false, false, false, false);
+('cd_settings', false, false, false, false, false);
 
 -- actions
 insert into core.pd_accesses (f_role, f_action, b_deletable, b_creatable, b_editable, b_full_control, sn_delete) values
 (2, 1, false, false, false, false, false),
 (2, 2, false, false, false, false, false);
 
--- security
-insert into core.pd_accesses (c_name, c_criteria, b_deletable, b_creatable,b_editable,b_full_control,sn_delete) values
-('pd_navigations', '[{"property":"id", "operator": "<>", "value": 4}]', false, false, false, false, false);
-
 insert into core.pd_accesses (f_user, f_role, c_name, f_action, c_criteria, c_path, c_function, c_columns, b_deletable, b_creatable,b_editable,b_full_control,sn_delete) values
 (-1,null, 'login', null, null, null, null, null, false,false,false,false,false),
 (null, null, 'create_access_procedure', null, null, null, null, null, false,false,false,false,false),
 (null, 2, 'set_pd_userinroles', null, null, null, null, null, false,false,false,false,false),
 (null, null, null, null, null, '/', null, null, true,true,true,true, false);
-
-insert into core.pd_navigations (c_view_type, c_alias, b_leaf, c_icon_cls, f_parent, c_name, b_default_token, c_type,
-b_visible, c_icon, b_selectable, b_expanded, n_sort, b_not_auth, sn_delete) values
-('pd_users-listview', 'pd_users', false, 'x-fa fa-shield', NULL, 'Безопасность', false, 'NAVIGATION', true, NULL, false,
-false, 100, false, false), --1
-('pd_users-listview', 'pd_users', true, 'x-fa fa-users', 1, 'Пользователи', false, 'NAVIGATION', true, NULL, false,
-false, 10, false, false), --2
-
-('pd_userinroles-listview', 'pd_userinroles', true, 'x-fa fa-eye', 1, 'Пользователи в ролях', false, 'NAVIGATION', true,
-NULL, false, false, 8, false, false), --3
-('pd_accesses-listview', 'pd_accesses', true, 'x-fa fa-edit', 1, 'Права доступа', false, 'NAVIGATION',true, NULL, false,
-false, 7, false, false), --4
-
-('pd_navigations-listview', 'pd_navigations', false, 'x-fa fa-lock', NULL, 'Администрирование', false, 'NAVIGATION',
-true, NULL, false, false, 90, false, false), --5
-('pd_navigations-listview', 'pd_navigations', true, 'x-fa fa-bars', 5, 'Навигация', true, 'NAVIGATION', true, NULL,
-false, false, 10, false, false), --6
-('cd_settings-listview', 'cd_settings', true, 'x-fa fa-cogs', 5, 'Настройки', false, 'NAVIGATION', true, NULL, false,
-false, 8, false, false), --8
-('sd_digests-listview', 'sd_digests', true, 'x-fa fa-book', 5, 'Журнал версий', false, 'NAVIGATION', true, NULL, false,
-false, 8, false, false), --9
-
-('login', 'login', true, 'x-fa fa-sign-in', NULL, 'Авторизация', false, 'USER', false, NULL, true, false, 10, true,
-false), --10
-('ad_audits-listview', 'ad_audits', true, 'x-fa fa-list-alt', 5, 'Аудит', false, 'NAVIGATION', true, NULL, true, false,
-11, false, false), --11
-
-('sd_ui_criteries-listview', 'sd_ui_criteries', true, 'x-fa fa-filter', 5, 'Критерии', false, 'NAVIGATION', true, NULL,
-false, false, 6, false, false), --12
-('filer-dataview', 'filer-dataview', true, 'x-fa fa-file', 5, 'Файловый менеджер', false, 'NAVIGATION', true, NULL,
-false, false, 5, false, false), --13
-('pd_roles-listview', 'pd_roles', false, 'x-fa fa-question', NULL, 'Справочник', false, 'NAVIGATION', true, NULL, false,
-false, 80, false, false), --14
-('cd_notifications-listview', 'cd_notifications', true, 'x-fa fa-comments', 5, 'Уведомления', false, 'NAVIGATION', true,
-NULL, false, false, 6, false, false), --15
-('pd_roles-listview', 'pd_roles', true, 'x-fa fa-user-secret', 14, 'Роли', false, 'NAVIGATION', true, NULL, false,
-false, 9, false, false),--16
-('sd_client_errors-listview', 'sd_client_errors', false, 'x-fa fa-exclamation', NULL, 'Телеметрия', false, 'NAVIGATION', true, NULL, false,
-false, 70, false, false), --17
-('sd_client_errors-listview', 'sd_client_errors', true, 'x-fa fa-mobile', 17, 'Ошибки моб. приложения', false, 'NAVIGATION', true, NULL, false,
-false, 10, false, false); --18 
 
 insert into core.pd_userindivisions (f_user, f_division, f_subdivision, sn_delete) values 
 (4, 5, 1, false),

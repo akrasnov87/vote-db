@@ -3,7 +3,6 @@ CREATE TABLE core.pd_accesses (
 	f_user integer,
 	f_role integer,
 	c_name text,
-	f_action integer,
 	c_criteria text,
 	c_path text,
 	c_function text,
@@ -26,8 +25,6 @@ COMMENT ON COLUMN core.pd_accesses.f_user IS '[e130] Пользователь';
 COMMENT ON COLUMN core.pd_accesses.f_role IS '[e120] Роль';
 
 COMMENT ON COLUMN core.pd_accesses.c_name IS '[e110] Табл./Предст./Функц.';
-
-COMMENT ON COLUMN core.pd_accesses.f_action IS '[e100] Действие';
 
 COMMENT ON COLUMN core.pd_accesses.c_criteria IS '[e90] Серверный фильтр';
 
@@ -58,11 +55,6 @@ CREATE TRIGGER pd_accesses_1
 
 ALTER TABLE core.pd_accesses
 	ADD CONSTRAINT pd_accesses_pkey PRIMARY KEY (id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE core.pd_accesses
-	ADD CONSTRAINT pd_accesses_f_action FOREIGN KEY (f_action) REFERENCES core.sd_ui_actions(id);
 
 --------------------------------------------------------------------------------
 

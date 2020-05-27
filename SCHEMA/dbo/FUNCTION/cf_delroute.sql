@@ -7,7 +7,7 @@ BEGIN
 	
 	delete from core.cd_user_points
 	where fn_route = _id;
-	
+
 	delete from core.cd_route_history
 	where fn_route = _id;
 	
