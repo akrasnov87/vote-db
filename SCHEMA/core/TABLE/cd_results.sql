@@ -47,6 +47,10 @@ COMMENT ON COLUMN core.cd_results.dx_created IS '[e10] Дата создания
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_results_fn_route_idx ON core.cd_results USING btree (fn_route);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_results_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_results
 	FOR EACH ROW

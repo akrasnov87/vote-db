@@ -26,6 +26,10 @@ CREATE INDEX cd_userinroutes_f_user_idx ON core.cd_userinroutes USING btree (f_u
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_userinroutes_f_route_idx ON core.cd_userinroutes USING btree (f_route);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_userinroutes_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_userinroutes
 	FOR EACH ROW
