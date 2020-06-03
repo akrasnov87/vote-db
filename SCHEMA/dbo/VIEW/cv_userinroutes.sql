@@ -1,9 +1,10 @@
 CREATE VIEW dbo.cv_userinroutes AS
-	SELECT ur.f_user AS user_id,
+	SELECT u.id,
     u.c_login,
     u.n_uik,
     r.f_type,
     rt.c_name AS c_route_type_name,
+    r.c_number,
     COALESCE(( SELECT count(*) AS count
            FROM core.cd_points p
           WHERE (p.f_route = ur.f_route)), (0)::bigint) AS n_all,
