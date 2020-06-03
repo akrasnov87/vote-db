@@ -10,7 +10,7 @@ CREATE TABLE core.cd_user_points (
 	n_latitude numeric(20,15) NOT NULL,
 	gx_geodata public.geography,
 	c_notice text,
-	b_check boolean NOT NULL DEFAULT false,
+	b_check boolean DEFAULT false NOT NULL,
 	jb_data jsonb,
 	d_date_check timestamp with time zone,
 	dx_created timestamp with time zone DEFAULT now(),
@@ -52,6 +52,10 @@ COMMENT ON COLUMN core.cd_user_points.d_date_check IS '[e30] Дата подтв
 COMMENT ON COLUMN core.cd_user_points.dx_created IS '[e20] Дата записи в БД';
 
 COMMENT ON COLUMN core.cd_user_points.d_date IS '[e10] Дата создания';
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_user_points_fn_user_fn_route_idx ON core.cd_user_points USING btree (fn_user, fn_route);
 
 --------------------------------------------------------------------------------
 

@@ -7,7 +7,7 @@ DECLARE
 	_route_number text;
 BEGIN
 	_route_id = uuid_generate_v4();
-	select concat(s.c_name, ' ', h.c_number) into _route_number from dbo.cs_house as h
+	select concat(s.c_name, ' ', h.c_house_num) into _route_number from dbo.cs_house as h
 	inner join dbo.cs_street as s ON h.f_street = s.id
 	where h.id = _f_house;
 	

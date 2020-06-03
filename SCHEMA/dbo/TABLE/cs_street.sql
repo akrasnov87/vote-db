@@ -2,10 +2,9 @@ CREATE TABLE dbo.cs_street (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
 	c_name text,
 	c_type text,
-	c_street_name text,
-	c_yandex_name text,
-	dx_created timestamp with time zone DEFAULT now(),
-	sn_delete boolean NOT NULL DEFAULT false
+	dx_date timestamp with time zone DEFAULT now(),
+	b_disabled boolean DEFAULT false NOT NULL,
+	f_division integer NOT NULL
 );
 
 ALTER TABLE dbo.cs_street OWNER TO mobnius;
@@ -14,26 +13,27 @@ COMMENT ON TABLE dbo.cs_street IS 'Улицы';
 
 COMMENT ON COLUMN dbo.cs_street.id IS '[e110] Идентификатор';
 
-COMMENT ON COLUMN dbo.cs_street.c_name IS '[e100] Наименование';
+COMMENT ON COLUMN dbo.cs_street.c_name IS 'улица';
 
-COMMENT ON COLUMN dbo.cs_street.c_type IS '[e90|d] Тип';
-
-COMMENT ON COLUMN dbo.cs_street.c_street_name IS '[e80] Имя';
-
-COMMENT ON COLUMN dbo.cs_street.c_yandex_name IS '[e70] Имя в yandex';
-
-COMMENT ON COLUMN dbo.cs_street.dx_created IS '[e20] Дата создания';
-
-COMMENT ON COLUMN dbo.cs_street.sn_delete IS '[e10] Признак удаленной записи';
+COMMENT ON COLUMN dbo.cs_street.c_type IS 'Тип';
 
 --------------------------------------------------------------------------------
 
-ALTER TABLE dbo.cs_street
-	ADD CONSTRAINT cs_street_pkey PRIMARY KEY (id);
-	
+CREATE INDEX cs_street_f_division_idx ON dbo.cs_street USING btree (f_division);
+
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER cs_street_trigger
 	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_street
 	FOR EACH ROW
 	EXECUTE PROCEDURE core.cft_0_log_action();
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_street
+	ADD CONSTRAINT cs_street_pkey PRIMARY KEY (id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_street
+	ADD CONSTRAINT cs_street_f_division_fkey FOREIGN KEY (f_division) REFERENCES core.sd_divisions(id);

@@ -31,6 +31,10 @@ COMMENT ON COLUMN core.cd_points.n_order IS '[e10] Сортировка';
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_points_f_route_idx ON core.cd_points USING btree (f_route);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_points_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_points
 	FOR EACH ROW
@@ -40,12 +44,12 @@ CREATE TRIGGER cd_points_1
 
 ALTER TABLE core.cd_points
 	ADD CONSTRAINT cd_points_pkey PRIMARY KEY (id);
-	
+
 --------------------------------------------------------------------------------
 
 ALTER TABLE core.cd_points
 	ADD CONSTRAINT cd_points_f_registr_pts_fkey FOREIGN KEY (f_registr_pts) REFERENCES dbo.ed_registr_pts(id);
-	
+
 --------------------------------------------------------------------------------
 
 ALTER TABLE core.cd_points

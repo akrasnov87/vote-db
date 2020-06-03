@@ -3,7 +3,7 @@ CREATE TABLE core.pd_userindivisions (
 	f_user integer NOT NULL,
 	f_division integer NOT NULL,
 	f_subdivision integer,
-	sn_delete boolean NOT NULL DEFAULT false
+	sn_delete boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE core.pd_userindivisions OWNER TO mobnius;
@@ -19,6 +19,10 @@ COMMENT ON COLUMN core.pd_userindivisions.f_division IS '[e30] Отделени�
 COMMENT ON COLUMN core.pd_userindivisions.f_subdivision IS '[e20] Участок';
 
 COMMENT ON COLUMN core.pd_userindivisions.sn_delete IS '[e10] Признак удаленной записи';
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX pd_userindivisions_f_user_idx ON core.pd_userindivisions USING btree (f_user);
 
 --------------------------------------------------------------------------------
 
@@ -40,7 +44,7 @@ ALTER TABLE core.pd_userindivisions
 --------------------------------------------------------------------------------
 
 ALTER TABLE core.pd_userindivisions
-	ADD CONSTRAINT pd_userindivisions_f_subdivision_fkey FOREIGN KEY (f_subdivision) REFERENCES core.sd_divisions(id);
+	ADD CONSTRAINT pd_userindivisions_f_subdivision_fkey FOREIGN KEY (f_subdivision) REFERENCES core.sd_subdivisions(id);
 
 --------------------------------------------------------------------------------
 

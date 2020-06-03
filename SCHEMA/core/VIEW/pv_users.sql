@@ -6,10 +6,7 @@ CREATE VIEW core.pv_users AS
     u.c_email,
     u.c_tel,
     u.c_description,
-    u.c_firstname,
-    u.c_lastname,
-    u.c_patronymic,
-    u.f_uik AS n_uik,
+    u.n_uik,
     ( WITH RECURSIVE tab_rec AS (
                  SELECT sd_divisions.id AS id_parent,
                     sd_divisions.id,

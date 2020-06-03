@@ -2,7 +2,7 @@ CREATE TABLE core.cd_userinroutes (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
 	f_route uuid NOT NULL,
 	f_user integer NOT NULL,
-	b_main boolean NOT NULL DEFAULT false,
+	b_main boolean DEFAULT false NOT NULL,
 	dx_created timestamp with time zone DEFAULT now()
 );
 
@@ -22,6 +22,10 @@ COMMENT ON COLUMN core.cd_userinroutes.dx_created IS '[e10] Дата созда�
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_userinroutes_f_user_idx ON core.cd_userinroutes USING btree (f_user);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_userinroutes_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_userinroutes
 	FOR EACH ROW
@@ -31,12 +35,12 @@ CREATE TRIGGER cd_userinroutes_1
 
 ALTER TABLE core.cd_userinroutes
 	ADD CONSTRAINT cd_userinroutes_pkey PRIMARY KEY (id);
-	
+
 --------------------------------------------------------------------------------
 
 ALTER TABLE core.cd_userinroutes
 	ADD CONSTRAINT cd_userinroutes_f_user_fkey FOREIGN KEY (f_user) REFERENCES core.pd_users(id);
-	
+
 --------------------------------------------------------------------------------
 
 ALTER TABLE core.cd_userinroutes

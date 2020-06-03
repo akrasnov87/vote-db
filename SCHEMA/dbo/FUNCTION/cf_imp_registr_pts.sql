@@ -9,18 +9,16 @@ BEGIN
 	truncate dbo.ed_registr_pts;
 
 	-- далее заливаем новые строки
-	insert into dbo.ed_registr_pts (id, c_appartament_num, n_appartament_num, c_house_num, n_house_num, c_address, n_longitude, n_latitude, f_division, b_disabled)
+	insert into dbo.ed_registr_pts (id, c_appartament_num, n_appartament_num, c_house_num, c_address, f_division, f_subdivision, n_uik)
 	select 
 		a.id, 
 		a.c_number, 
 		a.n_number,
 		h.c_house_num,
-		h.n_number,
 		s.c_name,
-		h.n_longitude,
-		h.n_latitude,
-		1,
-		false
+		s.f_division,
+		h.f_subdivision,
+		h.n_uik
 	from dbo.cs_appartament as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
 	inner join dbo.cs_street as s ON h.f_street = s.id;

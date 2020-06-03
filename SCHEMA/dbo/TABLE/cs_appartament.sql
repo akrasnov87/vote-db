@@ -1,10 +1,10 @@
 CREATE TABLE dbo.cs_appartament (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-	f_house uuid,
+	f_house uuid NOT NULL,
 	c_number text,
 	n_number integer,
-	dx_created timestamp with time zone DEFAULT now(),
-	sn_delete boolean DEFAULT false NOT NULL,
+	dx_date timestamp with time zone DEFAULT now(),
+	b_disabled boolean DEFAULT false NOT NULL,
 	f_user integer
 );
 
@@ -12,13 +12,23 @@ ALTER TABLE dbo.cs_appartament OWNER TO mobnius;
 
 COMMENT ON TABLE dbo.cs_appartament IS 'Квартиры';
 
-COMMENT ON COLUMN dbo.cs_appartament.id IS '[e60] Идентификатор';
+COMMENT ON COLUMN dbo.cs_appartament.id IS 'Идентификатор';
 
-COMMENT ON COLUMN dbo.cs_appartament.f_house IS '[e50] Дом';
+COMMENT ON COLUMN dbo.cs_appartament.f_house IS 'Дом';
 
-COMMENT ON COLUMN dbo.cs_appartament.c_number IS '[e30] Номер';
+COMMENT ON COLUMN dbo.cs_appartament.c_number IS 'Строковый номер';
 
-COMMENT ON COLUMN dbo.cs_appartament.n_number IS '[e20] Номер';
+COMMENT ON COLUMN dbo.cs_appartament.n_number IS 'Номер';
+
+COMMENT ON COLUMN dbo.cs_appartament.f_user IS 'Агитатор';
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cs_appartament_f_house_idx ON dbo.cs_appartament USING btree (f_house);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cs_appartament_f_user_idx ON dbo.cs_appartament USING btree (f_user);
 
 --------------------------------------------------------------------------------
 

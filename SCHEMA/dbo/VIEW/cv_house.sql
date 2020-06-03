@@ -4,13 +4,14 @@ CREATE VIEW dbo.cv_house AS
     s.c_name AS street_name,
     h.c_house_num,
     h.c_build_num,
-    h.n_porch,
-    h.n_height_num,
-    h.n_appartament,
-    h.c_data,
-    h.b_mkd,
-    h.b_private,
-    h.b_self
+    h.c_porch,
+    h.c_floor,
+    ( SELECT count(*) AS count
+           FROM dbo.cs_appartament a
+          WHERE (a.f_house = h.id)) AS n_appartament,
+    ( SELECT (count(*) = 1)
+           FROM dbo.cs_appartament a
+          WHERE (a.f_house = h.id)) AS b_private
    FROM (dbo.cs_house h
      JOIN dbo.cs_street s ON ((h.f_street = s.id)));
 

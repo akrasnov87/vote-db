@@ -5,18 +5,13 @@ CREATE TABLE core.pd_users (
 	c_password text,
 	s_salt text,
 	s_hash text,
-	c_firstname text,
-	c_lastname text,
-	c_patronymic text,
 	c_email text,
 	c_tel text,
 	c_imei text,
 	c_description text,
 	b_disabled boolean DEFAULT false NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
-	f_uik bigint,
-	c_work text,
-	c_post text
+	n_uik integer
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;
@@ -35,12 +30,6 @@ COMMENT ON COLUMN core.pd_users.s_salt IS '[e100] Salt';
 
 COMMENT ON COLUMN core.pd_users.s_hash IS '[e90] Hash';
 
-COMMENT ON COLUMN core.pd_users.c_firstname IS '[e80] Имя';
-
-COMMENT ON COLUMN core.pd_users.c_lastname IS '[e70] Фамилия';
-
-COMMENT ON COLUMN core.pd_users.c_patronymic IS '[e60] Отчество';
-
 COMMENT ON COLUMN core.pd_users.c_email IS '[e50] Адрес эл. почты';
 
 COMMENT ON COLUMN core.pd_users.c_tel IS '[e40] Телефон';
@@ -53,11 +42,7 @@ COMMENT ON COLUMN core.pd_users.b_disabled IS '[e20] Отключен';
 
 COMMENT ON COLUMN core.pd_users.sn_delete IS '[e10] Удален';
 
-COMMENT ON COLUMN core.pd_users.f_uik IS '[e0] УИК';
-
-COMMENT ON COLUMN core.pd_users.c_work IS 'Место работы волонтера';
-
-COMMENT ON COLUMN core.pd_users.c_post IS 'Должность';
+COMMENT ON COLUMN core.pd_users.n_uik IS '[e0] УИК';
 
 --------------------------------------------------------------------------------
 
@@ -80,8 +65,3 @@ ALTER TABLE core.pd_users
 
 ALTER TABLE core.pd_users
 	ADD CONSTRAINT pd_users_f_parent_fkey FOREIGN KEY (f_parent) REFERENCES core.pd_users(id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE core.pd_users
-	ADD CONSTRAINT pd_users_f_uik_fkey FOREIGN KEY (f_uik) REFERENCES dbo.cs_uik(id) NOT VALID;
