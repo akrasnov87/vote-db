@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dbo.cf_imp_generate_routes(_limit_daate date) RETURNS TABLE(c_login text, n_status integer)
+CREATE OR REPLACE FUNCTION dbo.cf_imp_generate_routes(_limit_date date) RETURNS TABLE(c_login text, n_status integer)
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -14,6 +14,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION dbo.cf_imp_generate_routes(date) OWNER TO mobnius;
+ALTER FUNCTION dbo.cf_imp_generate_routes(_limit_date date) OWNER TO mobnius;
 
-COMMENT ON FUNCTION dbo.cf_imp_generate_routes(date) IS 'Генерация маршрутов для пользователей';
+COMMENT ON FUNCTION dbo.cf_imp_generate_routes(_limit_date date) IS 'Генерация маршрутов для пользователей';
