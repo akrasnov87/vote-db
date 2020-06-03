@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dbo.cf_imp_by_user(_user_id integer, _route_type_id integer, _date_activate date) RETURNS integer
+CREATE OR REPLACE FUNCTION dbo.cf_imp_by_user(_user_id integer, _route_type_id integer, _date_activate date, _date_limit date) RETURNS integer
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -11,7 +11,7 @@ BEGIN
 					from (select 
 								f_house, 
 								f_user,
-								(SELECT dbo.cf_create_route(f_house, _user_id, _route_type_id, now()::date)) as route_id
+								(SELECT dbo.cf_create_route(f_house, _user_id, _route_type_id, _date_activate, _date_limit)) as route_id
 							from dbo.cs_appartament
 							where f_user = _user_id
 							group by f_house, f_user) as t);
@@ -23,6 +23,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION dbo.cf_imp_by_user(_user_id integer, _route_type_id integer, _date_activate date) OWNER TO mobnius;
+ALTER FUNCTION dbo.cf_imp_by_user(_user_id integer, _route_type_id integer, _date_activate date, _date_limit date) OWNER TO mobnius;
 
-COMMENT ON FUNCTION dbo.cf_imp_by_user(_user_id integer, _route_type_id integer, _date_activate date) IS 'Импорт данных для пользователя';
+COMMENT ON FUNCTION dbo.cf_imp_by_user(_user_id integer, _route_type_id integer, _date_activate date, _date_limit date) IS 'Импорт данных для пользователя';

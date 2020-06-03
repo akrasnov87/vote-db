@@ -15,7 +15,7 @@ BEGIN
 		a.c_number, 
 		a.n_number,
 		h.c_house_num,
-		s.c_name,
+		concat(s.c_type, ' ', s.c_name) as c_address,
 		s.f_division,
 		h.f_subdivision,
 		h.n_uik
