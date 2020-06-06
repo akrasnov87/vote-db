@@ -3,7 +3,7 @@ CREATE TABLE core.pd_roles (
 	c_name text NOT NULL,
 	c_description text,
 	n_weight integer NOT NULL,
-	sn_delete boolean NOT NULL DEFAULT false
+	sn_delete boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE core.pd_roles OWNER TO mobnius;
@@ -19,6 +19,10 @@ COMMENT ON COLUMN core.pd_roles.c_description IS '[e30] Описание рол�
 COMMENT ON COLUMN core.pd_roles.n_weight IS '[e20] Приоритет';
 
 COMMENT ON COLUMN core.pd_roles.sn_delete IS '[e10] Удален';
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX pd_roles_c_name_idx ON core.pd_roles USING btree (c_name);
 
 --------------------------------------------------------------------------------
 

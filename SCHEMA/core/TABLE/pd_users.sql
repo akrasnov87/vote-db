@@ -46,6 +46,10 @@ COMMENT ON COLUMN core.pd_users.n_uik IS '[e0] УИК';
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX pd_users_n_uik_idx ON core.pd_users USING btree (n_uik);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER pd_users_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.pd_users
 	FOR EACH ROW

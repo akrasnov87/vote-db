@@ -35,6 +35,10 @@ CREATE INDEX cd_points_f_route_idx ON core.cd_points USING btree (f_route);
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_points_f_registr_pts ON core.cd_points USING btree (f_registr_pts);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_points_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_points
 	FOR EACH ROW

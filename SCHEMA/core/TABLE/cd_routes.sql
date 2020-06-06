@@ -43,6 +43,10 @@ COMMENT ON COLUMN core.cd_routes.n_order IS '[e10] Сортировка';
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_routes_d_date_end_idx ON core.cd_routes USING btree (d_date_end);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_routes_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_routes
 	FOR EACH ROW
@@ -52,7 +56,7 @@ CREATE TRIGGER cd_routes_1
 
 ALTER TABLE core.cd_routes
 	ADD CONSTRAINT cd_routes_pkey PRIMARY KEY (id);
-	
+
 --------------------------------------------------------------------------------
 
 ALTER TABLE core.cd_routes
