@@ -3,7 +3,7 @@ CREATE TABLE dbo.cs_appartament (
 	f_house uuid NOT NULL,
 	c_number text,
 	n_number integer,
-	dx_date timestamp with time zone DEFAULT now(),
+	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	f_user integer
 );

@@ -4,8 +4,9 @@ CREATE TABLE core.sd_digests (
 	c_description text NOT NULL,
 	f_division integer,
 	c_app_name text NOT NULL,
-	b_hidden boolean NOT NULL DEFAULT false,
-	ba_file bytea NOT NULL
+	b_hidden boolean DEFAULT false NOT NULL,
+	ba_file bytea NOT NULL,
+	dx_created timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE core.sd_digests OWNER TO mobnius;

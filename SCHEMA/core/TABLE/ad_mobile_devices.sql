@@ -2,14 +2,14 @@ CREATE TABLE core.ad_mobile_devices (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
 	fn_user integer NOT NULL,
 	d_date timestamp with time zone NOT NULL,
-	b_debug boolean NOT NULL DEFAULT false,
+	b_debug boolean DEFAULT false NOT NULL,
 	c_architecture text,
 	c_phone_model text,
 	c_sdk text,
 	c_os text,
 	c_imei text,
 	c_application_version text,
-	dx_created timestamp with time zone DEFAULT now()
+	dx_created timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE core.ad_mobile_devices OWNER TO mobnius;

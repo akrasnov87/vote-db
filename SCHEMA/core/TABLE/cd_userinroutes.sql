@@ -3,7 +3,7 @@ CREATE TABLE core.cd_userinroutes (
 	f_route uuid NOT NULL,
 	f_user integer NOT NULL,
 	b_main boolean DEFAULT false NOT NULL,
-	dx_created timestamp with time zone DEFAULT now()
+	dx_created timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE core.cd_userinroutes OWNER TO mobnius;

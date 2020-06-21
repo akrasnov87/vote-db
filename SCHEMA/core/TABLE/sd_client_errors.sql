@@ -7,7 +7,7 @@ CREATE TABLE core.sd_client_errors (
 	c_version text NOT NULL,
 	c_platform text NOT NULL,
 	jb_data jsonb,
-	dx_date timestamp with time zone DEFAULT now()
+	dx_date timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE core.sd_client_errors OWNER TO mobnius;

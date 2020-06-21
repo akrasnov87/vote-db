@@ -9,7 +9,7 @@ CREATE TABLE core.cd_routes (
 	b_extended boolean NOT NULL,
 	d_extended date,
 	jb_data jsonb,
-	dx_created timestamp with time zone DEFAULT now(),
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	n_order integer NOT NULL
 );
 

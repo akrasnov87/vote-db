@@ -5,7 +5,7 @@ CREATE TABLE core.cd_points (
 	c_notice text,
 	c_info text,
 	jb_data jsonb,
-	dx_created timestamp with time zone DEFAULT now(),
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	n_order integer NOT NULL
 );
 

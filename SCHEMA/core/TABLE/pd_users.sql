@@ -11,7 +11,8 @@ CREATE TABLE core.pd_users (
 	c_description text,
 	b_disabled boolean DEFAULT false NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
-	n_uik integer
+	n_uik integer,
+	dx_created timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;

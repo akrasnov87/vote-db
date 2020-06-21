@@ -6,7 +6,7 @@ CREATE TABLE dbo.cs_answer (
 	c_action text,
 	n_order integer DEFAULT 0 NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
-	dx_created timestamp with time zone DEFAULT now(),
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
 	c_color text
 );

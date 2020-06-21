@@ -2,7 +2,7 @@ CREATE TABLE dbo.cs_street (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
 	c_name text,
 	c_type text,
-	dx_date timestamp with time zone DEFAULT now(),
+	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	f_division integer NOT NULL
 );

@@ -5,7 +5,7 @@ CREATE TABLE dbo.cs_question (
 	c_text text NOT NULL,
 	n_order integer NOT NULL DEFAULT 0,
 	b_disabled boolean NOT NULL DEFAULT false,
-	dx_created timestamp with time zone DEFAULT now(),
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	sn_delete boolean NOT NULL DEFAULT false
 );
 

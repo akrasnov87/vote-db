@@ -11,7 +11,7 @@ CREATE TABLE core.cd_results (
 	fn_question integer,
 	fn_answer integer,
 	jb_data jsonb,
-	dx_created timestamp with time zone DEFAULT now(),
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	n_order integer NOT NULL
 );
 

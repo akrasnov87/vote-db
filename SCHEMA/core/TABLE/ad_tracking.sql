@@ -6,7 +6,7 @@ CREATE TABLE core.ad_tracking (
 	n_latitude numeric(20,15) NOT NULL,
 	c_network_status text,
 	gx_geodata public.geography,
-	dx_created timestamp with time zone DEFAULT now()
+	dx_created timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE core.ad_tracking OWNER TO mobnius;

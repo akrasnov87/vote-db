@@ -5,7 +5,7 @@ CREATE TABLE core.ad_audits (
 	c_data text,
 	c_type text NOT NULL,
 	c_app_name text NOT NULL,
-	dx_created timestamp with time zone DEFAULT now()
+	dx_created timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE core.ad_audits OWNER TO mobnius;

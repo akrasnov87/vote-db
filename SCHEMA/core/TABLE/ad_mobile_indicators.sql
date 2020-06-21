@@ -3,7 +3,7 @@ CREATE TABLE core.ad_mobile_indicators (
 	fn_user integer NOT NULL,
 	d_date timestamp with time zone DEFAULT now() NOT NULL,
 	c_network_type text,
-	b_isonline boolean NOT NULL DEFAULT false,
+	b_isonline boolean DEFAULT false NOT NULL,
 	n_ram bigint,
 	n_used_ram bigint,
 	n_phone_memory bigint,
@@ -12,7 +12,7 @@ CREATE TABLE core.ad_mobile_indicators (
 	n_used_sd_card_memory bigint,
 	n_battery_level integer,
 	n_time integer,
-	dx_created timestamp with time zone DEFAULT now()
+	dx_created timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE core.ad_mobile_indicators OWNER TO mobnius;

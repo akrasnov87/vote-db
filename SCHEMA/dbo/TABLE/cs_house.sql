@@ -3,7 +3,7 @@ CREATE TABLE dbo.cs_house (
 	f_street uuid,
 	c_house_num text,
 	c_build_num text,
-	dx_date timestamp with time zone DEFAULT now(),
+	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	n_uik integer NOT NULL,
 	c_floor text,

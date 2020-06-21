@@ -13,7 +13,7 @@ CREATE TABLE core.cd_user_points (
 	b_check boolean DEFAULT false NOT NULL,
 	jb_data jsonb,
 	d_date_check timestamp with time zone,
-	dx_created timestamp with time zone DEFAULT now(),
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	d_date timestamp with time zone NOT NULL
 );
 
