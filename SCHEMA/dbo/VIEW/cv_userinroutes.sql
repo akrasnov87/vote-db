@@ -13,7 +13,7 @@ CREATE VIEW dbo.cv_userinroutes AS
           WHERE ((up.fn_user = u.id) AND (ur.f_route = up.fn_route))), (0)::bigint) AS n_count,
     COALESCE(( SELECT count(*) AS count
            FROM core.cd_user_points up
-          WHERE ((up.fn_user = u.id) AND (ur.f_route = up.fn_route) AND (( SELECT date_trunc('month'::text, up.d_date) AS date_trunc) = ( SELECT date_trunc('month'::text, (CURRENT_DATE)::timestamp with time zone) AS date_trunc)))), (0)::bigint) AS n_today_count
+          WHERE ((up.fn_user = u.id) AND (ur.f_route = up.fn_route) AND ((up.d_date)::date = CURRENT_DATE))), (0)::bigint) AS n_today_count
    FROM (((core.cd_userinroutes ur
      JOIN core.pd_users u ON ((u.id = ur.f_user)))
      JOIN core.cd_routes r ON ((ur.f_route = r.id)))
