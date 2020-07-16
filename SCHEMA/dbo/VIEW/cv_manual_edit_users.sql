@@ -9,3 +9,5 @@ CREATE VIEW dbo.cv_manual_edit_users AS
   WHERE (r.c_name = 'manual_edit'::text);
 
 ALTER VIEW dbo.cv_manual_edit_users OWNER TO mobnius;
+
+COMMENT ON VIEW dbo.cv_manual_edit_users IS 'Список пользователей, которым разрешено заполнение таблицы cd_vote_man';
