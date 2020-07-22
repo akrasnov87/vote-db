@@ -4,7 +4,8 @@ CREATE TABLE dbo.cs_street (
 	c_type text,
 	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
-	f_division integer NOT NULL
+	f_division integer NOT NULL,
+	c_short_type text
 );
 
 ALTER TABLE dbo.cs_street OWNER TO mobnius;
