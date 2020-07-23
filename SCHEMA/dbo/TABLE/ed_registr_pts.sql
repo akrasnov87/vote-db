@@ -8,8 +8,7 @@ CREATE TABLE dbo.ed_registr_pts (
 	f_subdivision integer,
 	b_disabled boolean DEFAULT false NOT NULL,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
-	sn_delete boolean DEFAULT false NOT NULL,
-	n_uik integer
+	sn_delete boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE dbo.ed_registr_pts OWNER TO mobnius;

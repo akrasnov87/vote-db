@@ -5,7 +5,8 @@ CREATE TABLE dbo.cs_appartament (
 	n_number integer,
 	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
-	f_user integer
+	f_user integer,
+	n_signature_2018 integer
 );
 
 ALTER TABLE dbo.cs_appartament OWNER TO mobnius;
@@ -21,6 +22,8 @@ COMMENT ON COLUMN dbo.cs_appartament.c_number IS 'Строковый номер'
 COMMENT ON COLUMN dbo.cs_appartament.n_number IS 'Номер';
 
 COMMENT ON COLUMN dbo.cs_appartament.f_user IS 'Агитатор';
+
+COMMENT ON COLUMN dbo.cs_appartament.n_signature_2018 IS 'Подписи в 2018';
 
 --------------------------------------------------------------------------------
 

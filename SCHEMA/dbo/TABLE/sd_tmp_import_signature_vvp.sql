@@ -70,5 +70,9 @@ CREATE INDEX sd_import_signature_vvp_b_import_idx ON dbo.sd_tmp_import_signature
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX sd_import_signature_vvp_f_appartament_idx ON dbo.sd_tmp_import_signature_vvp USING btree (f_appartament);
+
+--------------------------------------------------------------------------------
+
 ALTER TABLE dbo.sd_tmp_import_signature_vvp
 	ADD CONSTRAINT sd_import_signature_vvp_pkey PRIMARY KEY (id);

@@ -1,6 +1,6 @@
 CREATE TABLE core.cd_points (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-	f_registr_pts uuid NOT NULL,
+	f_appartament uuid NOT NULL,
 	f_route uuid NOT NULL,
 	c_notice text,
 	c_info text,
@@ -15,7 +15,7 @@ COMMENT ON TABLE core.cd_points IS 'Точки';
 
 COMMENT ON COLUMN core.cd_points.id IS '[e80] Идентификатор';
 
-COMMENT ON COLUMN core.cd_points.f_registr_pts IS '[e70|d] Учетный показатель';
+COMMENT ON COLUMN core.cd_points.f_appartament IS 'Квартира';
 
 COMMENT ON COLUMN core.cd_points.f_route IS '[e60] Маршрут';
 
@@ -35,7 +35,7 @@ CREATE INDEX cd_points_f_route_idx ON core.cd_points USING btree (f_route);
 
 --------------------------------------------------------------------------------
 
-CREATE INDEX cd_points_f_registr_pts ON core.cd_points USING btree (f_registr_pts);
+CREATE INDEX cd_points_f_appartament_idx ON core.cd_points USING btree (f_appartament);
 
 --------------------------------------------------------------------------------
 
@@ -48,11 +48,6 @@ CREATE TRIGGER cd_points_1
 
 ALTER TABLE core.cd_points
 	ADD CONSTRAINT cd_points_pkey PRIMARY KEY (id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE core.cd_points
-	ADD CONSTRAINT cd_points_f_registr_pts_fkey FOREIGN KEY (f_registr_pts) REFERENCES dbo.ed_registr_pts(id);
 
 --------------------------------------------------------------------------------
 
