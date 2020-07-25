@@ -5,7 +5,8 @@ CREATE TABLE dbo.cs_street (
 	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	f_division integer NOT NULL,
-	c_short_type text
+	c_short_type text,
+	f_user integer
 );
 
 ALTER TABLE dbo.cs_street OWNER TO mobnius;
@@ -38,3 +39,8 @@ ALTER TABLE dbo.cs_street
 
 ALTER TABLE dbo.cs_street
 	ADD CONSTRAINT cs_street_f_division_fkey FOREIGN KEY (f_division) REFERENCES core.sd_divisions(id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_street
+	ADD CONSTRAINT cs_street_f_user_fkey FOREIGN KEY (f_user) REFERENCES core.pd_users(id) NOT VALID;

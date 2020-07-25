@@ -105,7 +105,6 @@ insert into core.pd_accesses (f_role, c_name, b_deletable, b_creatable, b_editab
 (3, 'cd_route_history', true, true, true, false, false),
 (3, 'cd_routes', true, true, true, false, false),
 (3, 'cd_userinroutes', true, true, true, false, false),
-(3, 'ed_registr_pts', false, false, false, false, false),
 (3, 'cs_point_types', false, false, false, false, false),
 (3, 'cs_result_types', false, false, false, false, false),
 (3, 'cs_route_statuses', false, false, false, false, false),

@@ -5,16 +5,16 @@ DECLARE
 	_result integer;
 	_route_number text;
 BEGIN
-	IF (select count(*) from dbo.cs_appartament where f_user = _user_id) > 0 THEN
+	IF (select count(*) from dbo.cs_appartament where f_main_user = _user_id) > 0 THEN
 		_result = ( select 
 						sum((SELECT dbo.cf_imp_points(_user_id, t.f_house, t.route_id)))
 					from (select 
 								f_house, 
-								f_user,
+								f_main_user,
 								(SELECT dbo.cf_create_route(f_house, _user_id, _route_type_id, _date_activate, _date_limit)) as route_id
 							from dbo.cs_appartament
-							where f_user = _user_id
-							group by f_house, f_user) as t);
+							where f_main_user = _user_id
+							group by f_house, f_main_user) as t);
 	ELSE
 		_result = 0;
 	END IF;

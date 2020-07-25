@@ -20,9 +20,9 @@ BEGIN
 	from dbo.cs_appartament as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
 	inner join dbo.cs_street as s ON s.id = h.f_street
-	where f_user = _user_id and f_house = _f_house;
+	where f_main_user = _user_id and f_house = _f_house;
 	
-	_result = (select count(*) from dbo.cs_appartament where f_user = _user_id and f_house = _f_house);
+	_result = (select count(*) from dbo.cs_appartament where f_main_user = _user_id and f_house = _f_house);
 	RETURN _result;
 END
 $$;

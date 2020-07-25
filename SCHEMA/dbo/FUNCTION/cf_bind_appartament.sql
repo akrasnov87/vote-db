@@ -8,7 +8,7 @@ BEGIN
 	
 		IF _appartament_start is null AND _appartamnt_finish is null THEN
 			update dbo.cs_appartament
-			set f_user = _userid
+			set f_main_user = _userid
 			where f_house = _house;
 			
 			_result = 0;
@@ -16,7 +16,7 @@ BEGIN
 			
 			IF _appartament_start is not null AND _appartamnt_finish is not null THEN
 				update dbo.cs_appartament
-				set f_user = _userid
+				set f_main_user = _userid
 				where f_house = _house and n_number >= _appartament_start and n_number <= _appartamnt_finish;
 
 				_result = 0;

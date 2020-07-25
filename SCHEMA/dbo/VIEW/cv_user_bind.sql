@@ -12,14 +12,14 @@ CREATE VIEW dbo.cv_user_bind AS
             ELSE concat(t.min_number, '-', t.max_number)
         END AS c_appartament,
     t.count_number AS n_appartament
-   FROM (((((( SELECT a.f_user,
+   FROM (((((( SELECT a.f_main_user AS f_user,
             a.f_house,
             min(a.n_number) AS min_number,
             max(a.n_number) AS max_number,
             count(*) AS count_number
            FROM dbo.cs_appartament a
-          WHERE (a.f_user IS NOT NULL)
-          GROUP BY a.f_user, a.f_house) t
+          WHERE (a.f_main_user IS NOT NULL)
+          GROUP BY a.f_main_user, a.f_house) t
      JOIN dbo.cs_house h ON ((h.id = t.f_house)))
      JOIN dbo.cs_street s ON ((h.f_street = s.id)))
      LEFT JOIN core.pd_users u ON ((t.f_user = u.id)))

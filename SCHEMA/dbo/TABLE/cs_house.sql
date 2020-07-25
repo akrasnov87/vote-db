@@ -5,10 +5,11 @@ CREATE TABLE dbo.cs_house (
 	c_build_num text,
 	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
-	n_uik integer NOT NULL,
+	n_uik integer,
 	c_floor text,
 	c_porch text,
-	f_subdivision integer
+	f_subdivision integer,
+	f_user integer
 );
 
 ALTER TABLE dbo.cs_house OWNER TO mobnius;
@@ -56,3 +57,8 @@ ALTER TABLE dbo.cs_house
 
 ALTER TABLE dbo.cs_house
 	ADD CONSTRAINT cs_house_f_subdivision_fkey FOREIGN KEY (f_subdivision) REFERENCES core.sd_subdivisions(id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_house
+	ADD CONSTRAINT cs_house_f_user_fkey FOREIGN KEY (f_user) REFERENCES core.pd_users(id) NOT VALID;

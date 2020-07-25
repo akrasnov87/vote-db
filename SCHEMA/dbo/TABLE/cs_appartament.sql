@@ -6,7 +6,8 @@ CREATE TABLE dbo.cs_appartament (
 	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	f_user integer,
-	n_signature_2018 integer
+	n_signature_2018 integer,
+	f_main_user integer
 );
 
 ALTER TABLE dbo.cs_appartament OWNER TO mobnius;
@@ -24,6 +25,8 @@ COMMENT ON COLUMN dbo.cs_appartament.n_number IS 'Номер';
 COMMENT ON COLUMN dbo.cs_appartament.f_user IS 'Агитатор';
 
 COMMENT ON COLUMN dbo.cs_appartament.n_signature_2018 IS 'Подписи в 2018';
+
+COMMENT ON COLUMN dbo.cs_appartament.f_main_user IS 'Ответственный';
 
 --------------------------------------------------------------------------------
 
@@ -54,3 +57,8 @@ ALTER TABLE dbo.cs_appartament
 
 ALTER TABLE dbo.cs_appartament
 	ADD CONSTRAINT cs_apartment_f_user_fkey FOREIGN KEY (f_user) REFERENCES core.pd_users(id) NOT VALID;
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_appartament
+	ADD CONSTRAINT cs_apartment_f_main_user_fkey FOREIGN KEY (f_main_user) REFERENCES core.pd_users(id) NOT VALID;

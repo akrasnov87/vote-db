@@ -7,7 +7,8 @@ CREATE TABLE dbo.cd_vote_man (
 	c_last_name text,
 	c_patronymic text,
 	f_user integer NOT NULL,
-	dx_created timestamp with time zone DEFAULT now() NOT NULL
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
+	n_birth_year integer
 );
 
 ALTER TABLE dbo.cd_vote_man OWNER TO mobnius;
@@ -27,6 +28,8 @@ COMMENT ON COLUMN dbo.cd_vote_man.c_last_name IS 'Фамилия';
 COMMENT ON COLUMN dbo.cd_vote_man.c_patronymic IS 'Отчество';
 
 COMMENT ON COLUMN dbo.cd_vote_man.f_user IS 'Пользователь';
+
+COMMENT ON COLUMN dbo.cd_vote_man.n_birth_year IS 'Год рождения';
 
 --------------------------------------------------------------------------------
 
