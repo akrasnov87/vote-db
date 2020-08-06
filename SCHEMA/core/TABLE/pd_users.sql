@@ -12,7 +12,9 @@ CREATE TABLE core.pd_users (
 	b_disabled boolean DEFAULT false NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
 	n_uik integer,
-	dx_created timestamp with time zone DEFAULT now() NOT NULL
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
+	f_subdivision integer,
+	c_fio text
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;
@@ -44,6 +46,10 @@ COMMENT ON COLUMN core.pd_users.b_disabled IS '[e20] Отключен';
 COMMENT ON COLUMN core.pd_users.sn_delete IS '[e10] Удален';
 
 COMMENT ON COLUMN core.pd_users.n_uik IS '[e0] УИК';
+
+COMMENT ON COLUMN core.pd_users.f_subdivision IS 'Округ для кандидата';
+
+COMMENT ON COLUMN core.pd_users.c_fio IS 'ФИО';
 
 --------------------------------------------------------------------------------
 

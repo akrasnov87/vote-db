@@ -6,7 +6,14 @@ CREATE TABLE dbo.cs_street (
 	b_disabled boolean DEFAULT false NOT NULL,
 	f_division integer NOT NULL,
 	c_short_type text,
-	f_user integer
+	f_user integer,
+	b_yandex boolean DEFAULT false NOT NULL,
+	b_yandex_fail boolean DEFAULT false NOT NULL,
+	jb_yandex_res jsonb,
+	n_latitude numeric,
+	n_longitude numeric,
+	c_yandex_description text,
+	c_yandex_name text
 );
 
 ALTER TABLE dbo.cs_street OWNER TO mobnius;

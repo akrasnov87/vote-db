@@ -33,6 +33,10 @@ COMMENT ON COLUMN dbo.cd_vote_man.n_birth_year IS 'Год рождения';
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_vote_man_f_appartament_idx ON dbo.cd_vote_man USING btree (f_appartament);
+
+--------------------------------------------------------------------------------
+
 ALTER TABLE dbo.cd_vote_man
 	ADD CONSTRAINT cd_vote_man_pkey PRIMARY KEY (id);
 

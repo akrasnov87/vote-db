@@ -10,7 +10,8 @@ CREATE TABLE core.cd_routes (
 	d_extended date,
 	jb_data jsonb,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
-	n_order integer NOT NULL
+	n_order integer NOT NULL,
+	f_house uuid
 );
 
 ALTER TABLE core.cd_routes OWNER TO mobnius;
@@ -41,6 +42,8 @@ COMMENT ON COLUMN core.cd_routes.dx_created IS '[e20] Дата создания 
 
 COMMENT ON COLUMN core.cd_routes.n_order IS '[e10] Сортировка';
 
+COMMENT ON COLUMN core.cd_routes.f_house IS 'Ссылка на дом';
+
 --------------------------------------------------------------------------------
 
 CREATE INDEX cd_routes_d_date_end_idx ON core.cd_routes USING btree (d_date_end);
@@ -61,3 +64,8 @@ ALTER TABLE core.cd_routes
 
 ALTER TABLE core.cd_routes
 	ADD CONSTRAINT cd_routes_f_type_fkey FOREIGN KEY (f_type) REFERENCES core.cs_route_types(id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE core.cd_routes
+	ADD CONSTRAINT cd_routes_f_house_fkey FOREIGN KEY (f_house) REFERENCES dbo.cs_house(id);

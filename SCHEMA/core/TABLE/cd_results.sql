@@ -12,7 +12,8 @@ CREATE TABLE core.cd_results (
 	fn_answer integer,
 	jb_data jsonb,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
-	n_order integer NOT NULL
+	n_order integer NOT NULL,
+	n_rating integer
 );
 
 ALTER TABLE core.cd_results OWNER TO mobnius;
@@ -44,6 +45,8 @@ COMMENT ON COLUMN core.cd_results.fn_answer IS '[e30] Ответ';
 COMMENT ON COLUMN core.cd_results.jb_data IS '[e20] JSON данные';
 
 COMMENT ON COLUMN core.cd_results.dx_created IS '[e10] Дата создания в БД';
+
+COMMENT ON COLUMN core.cd_results.n_rating IS 'Оценка';
 
 --------------------------------------------------------------------------------
 

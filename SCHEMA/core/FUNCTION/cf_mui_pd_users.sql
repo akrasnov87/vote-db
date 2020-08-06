@@ -1,16 +1,16 @@
-CREATE OR REPLACE FUNCTION core.cf_mui_pd_users(_fn_user integer) RETURNS TABLE(id integer, f_parent integer, c_login text, c_email text, c_tel text, c_description text, b_disabled boolean, n_uik integer)
+CREATE OR REPLACE FUNCTION core.cf_mui_pd_users(_fn_user integer) RETURNS TABLE(id integer, f_parent integer, c_login text, c_fio text, c_email text, c_tel text, c_description text, b_disabled boolean, n_uik integer, f_subdivision integer)
     LANGUAGE plpgsql STABLE
     AS $$
-
 BEGIN
-    RETURN QUERY select u.id, u.f_parent, u.c_login, u.c_email, u.c_tel, u.c_description, u.b_disabled, u.n_uik from core.pd_users as u
+    RETURN QUERY select u.id, u.f_parent, u.c_login, u.c_fio, u.c_email, u.c_tel, u.c_description, u.b_disabled, u.n_uik, u.f_subdivision
+	from core.pd_users as u
     where u.id in (
     select distinct cuir.f_user from core.cd_userinroutes as cuir
     where cuir.f_route in (
     select r.id 
     from core.cd_userinroutes as uir
     LEFT JOIN core.cd_routes as r ON r.id = uir.f_route
-    where uir.f_user = _fn_user));
+    where uir.f_user = _fn_user)) or u.id = _fn_user;
 END
 $$;
 

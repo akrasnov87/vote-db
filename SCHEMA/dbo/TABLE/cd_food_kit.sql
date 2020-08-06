@@ -8,7 +8,7 @@ CREATE TABLE dbo.cd_food_kit (
 	c_patronymic text,
 	f_user integer NOT NULL,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
-	c_description text,
+	c_phone text,
 	f_type integer NOT NULL
 );
 
@@ -32,25 +32,9 @@ COMMENT ON COLUMN dbo.cd_food_kit.f_user IS 'Пользователь';
 
 --------------------------------------------------------------------------------
 
-ALTER TABLE dbo.cd_food_kit
-	ADD CONSTRAINT sd_tmp_import2_pkey PRIMARY KEY (id);
+CREATE INDEX cd_food_kit_f_appartament_idx ON dbo.cd_food_kit USING btree (f_appartament);
 
 --------------------------------------------------------------------------------
 
 ALTER TABLE dbo.cd_food_kit
-	ADD CONSTRAINT sd_tmp_import2_f_appartament FOREIGN KEY (f_appartament) REFERENCES dbo.cs_appartament(id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE dbo.cd_food_kit
-	ADD CONSTRAINT sd_tmp_import2_f_house FOREIGN KEY (f_house) REFERENCES dbo.cs_house(id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE dbo.cd_food_kit
-	ADD CONSTRAINT sd_tmp_import2_f_user FOREIGN KEY (f_user) REFERENCES core.pd_users(id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE dbo.cd_food_kit
-	ADD CONSTRAINT sd_tmp_import2_street FOREIGN KEY (f_street) REFERENCES dbo.cs_street(id);
+	ADD CONSTRAINT cd_food_kit_pkey PRIMARY KEY (id);

@@ -8,7 +8,8 @@ CREATE TABLE dbo.cs_answer (
 	b_disabled boolean DEFAULT false NOT NULL,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
-	c_color text
+	c_color text,
+	f_role integer
 );
 
 ALTER TABLE dbo.cs_answer OWNER TO mobnius;
@@ -35,6 +36,8 @@ COMMENT ON COLUMN dbo.cs_answer.sn_delete IS '[e10] Признак удален�
 
 COMMENT ON COLUMN dbo.cs_answer.c_color IS '[e05] Цвет';
 
+COMMENT ON COLUMN dbo.cs_answer.f_role IS 'Конкретно для указанной роли';
+
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER cs_answer_trigger
@@ -56,3 +59,8 @@ ALTER TABLE dbo.cs_answer
 
 ALTER TABLE dbo.cs_answer
 	ADD CONSTRAINT cs_answer_f_next_question_fkey FOREIGN KEY (f_next_question) REFERENCES dbo.cs_question(id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_answer
+	ADD CONSTRAINT cs_answer_f_role_fkey FOREIGN KEY (f_role) REFERENCES core.pd_roles(id) NOT VALID;

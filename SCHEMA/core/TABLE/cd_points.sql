@@ -6,7 +6,8 @@ CREATE TABLE core.cd_points (
 	c_info text,
 	jb_data jsonb,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
-	n_order integer NOT NULL
+	n_order integer NOT NULL,
+	n_priority integer
 );
 
 ALTER TABLE core.cd_points OWNER TO mobnius;
@@ -28,6 +29,8 @@ COMMENT ON COLUMN core.cd_points.jb_data IS '[e30] JSON данные';
 COMMENT ON COLUMN core.cd_points.dx_created IS '[e20] Дата создания в БД';
 
 COMMENT ON COLUMN core.cd_points.n_order IS '[e10] Сортировка';
+
+COMMENT ON COLUMN core.cd_points.n_priority IS 'Приоритет задания';
 
 --------------------------------------------------------------------------------
 
@@ -53,3 +56,8 @@ ALTER TABLE core.cd_points
 
 ALTER TABLE core.cd_points
 	ADD CONSTRAINT cd_points_f_route_fkey FOREIGN KEY (f_route) REFERENCES core.cd_routes(id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE core.cd_points
+	ADD CONSTRAINT cd_points_f_appartament_fkey FOREIGN KEY (f_appartament) REFERENCES dbo.cs_appartament(id);

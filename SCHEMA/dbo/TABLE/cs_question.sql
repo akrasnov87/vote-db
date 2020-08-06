@@ -3,10 +3,12 @@ CREATE TABLE dbo.cs_question (
 	c_title text NOT NULL,
 	c_description text NOT NULL,
 	c_text text NOT NULL,
-	n_order integer NOT NULL DEFAULT 0,
-	b_disabled boolean NOT NULL DEFAULT false,
+	n_order integer DEFAULT 0 NOT NULL,
+	b_disabled boolean DEFAULT false NOT NULL,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
-	sn_delete boolean NOT NULL DEFAULT false
+	sn_delete boolean DEFAULT false NOT NULL,
+	f_role integer,
+	n_priority integer
 );
 
 ALTER TABLE dbo.cs_question OWNER TO mobnius;
@@ -29,14 +31,21 @@ COMMENT ON COLUMN dbo.cs_question.dx_created IS '[e20] Дата создания
 
 COMMENT ON COLUMN dbo.cs_question.sn_delete IS '[e10] Признак удаленной записи';
 
---------------------------------------------------------------------------------
+COMMENT ON COLUMN dbo.cs_question.f_role IS 'Конкретно для указанной роли';
 
-ALTER TABLE dbo.cs_question
-	ADD CONSTRAINT cs_question_pkey PRIMARY KEY (id);
-	
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER cs_question_trigger
 	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_question
 	FOR EACH ROW
 	EXECUTE PROCEDURE core.cft_0_log_action();
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_question
+	ADD CONSTRAINT cs_question_pkey PRIMARY KEY (id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE dbo.cs_question
+	ADD CONSTRAINT cs_question_f_role_fkey FOREIGN KEY (f_role) REFERENCES core.pd_roles(id) NOT VALID;

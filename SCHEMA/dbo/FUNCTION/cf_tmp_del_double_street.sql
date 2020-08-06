@@ -13,6 +13,10 @@ BEGIN
 	update dbo.cd_food_kit
 	set f_street = _correct
 	where f_street = _del;
+	
+	update dbo.cd_budget
+	set f_street = _correct
+	where f_street = _del;
 
 	delete from dbo.cs_street
 	where id = _del;

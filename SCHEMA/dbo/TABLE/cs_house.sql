@@ -9,7 +9,17 @@ CREATE TABLE dbo.cs_house (
 	c_floor text,
 	c_porch text,
 	f_subdivision integer,
-	f_user integer
+	f_user integer,
+	f_candidate_users jsonb,
+	b_correct_uik boolean DEFAULT false NOT NULL,
+	n_uik_correct integer,
+	n_latitude numeric,
+	n_longitude numeric,
+	jb_yandex_res jsonb,
+	c_yandex_description text,
+	c_yandex_name text,
+	b_yandex boolean DEFAULT false NOT NULL,
+	b_yandex_fail boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE dbo.cs_house OWNER TO mobnius;
@@ -27,6 +37,16 @@ COMMENT ON COLUMN dbo.cs_house.c_build_num IS 'Корпус';
 COMMENT ON COLUMN dbo.cs_house.c_floor IS 'Кол-во этажей';
 
 COMMENT ON COLUMN dbo.cs_house.c_porch IS 'Кол-во подъездов в доме';
+
+COMMENT ON COLUMN dbo.cs_house.f_candidate_users IS 'Кандидаты';
+
+COMMENT ON COLUMN dbo.cs_house.b_correct_uik IS 'Проводилась проверка на корректность УИК';
+
+COMMENT ON COLUMN dbo.cs_house.n_uik_correct IS 'Скорректированный УИК';
+
+COMMENT ON COLUMN dbo.cs_house.n_latitude IS 'широта';
+
+COMMENT ON COLUMN dbo.cs_house.n_longitude IS 'долгота';
 
 --------------------------------------------------------------------------------
 

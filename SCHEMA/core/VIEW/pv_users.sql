@@ -7,6 +7,9 @@ CREATE VIEW core.pv_users AS
     u.c_tel,
     u.c_description,
     u.n_uik,
+    u.c_fio,
+    u.f_subdivision,
+    max(_sd.c_name) AS c_subdivision,
     ( WITH RECURSIVE tab_rec AS (
                  SELECT sd_divisions.id AS id_parent,
                     sd_divisions.id,
@@ -34,7 +37,7 @@ CREATE VIEW core.pv_users AS
            FROM core.pd_userindivisions pud
           WHERE (pud.f_user = u.id)) AS c_subdivisions,
     u.b_disabled
-   FROM ((core.pd_users u
+   FROM (((core.pd_users u
      LEFT JOIN core.pd_userinroles uir ON ((u.id = uir.f_user)))
      LEFT JOIN ( SELECT pd_roles.id,
             pd_roles.c_description,
@@ -43,6 +46,7 @@ CREATE VIEW core.pv_users AS
             pd_roles.sn_delete
            FROM core.pd_roles
           ORDER BY pd_roles.n_weight DESC) r ON ((r.id = uir.f_role)))
+     LEFT JOIN core.sd_subdivisions _sd ON ((_sd.id = u.f_subdivision)))
   WHERE ((uir.sn_delete = false) AND (u.sn_delete = false) AND (r.sn_delete = false))
   GROUP BY u.id;
 

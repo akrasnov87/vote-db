@@ -6,6 +6,8 @@ CREATE VIEW dbo.cv_house AS
     h.c_house_num,
     h.c_build_num,
     h.n_uik,
+    h.c_floor,
+    h.c_porch,
     h.f_subdivision,
     sd.c_name AS c_subdivision,
         CASE
