@@ -9,6 +9,7 @@ CREATE VIEW dbo.cv_house AS
     h.c_floor,
     h.c_porch,
     h.f_subdivision,
+    s.f_division,
     sd.c_name AS c_subdivision,
         CASE
             WHEN ((h.n_uik IS NULL) OR (h.f_subdivision IS NULL)) THEN true

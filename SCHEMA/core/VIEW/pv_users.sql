@@ -9,6 +9,7 @@ CREATE VIEW core.pv_users AS
     u.n_uik,
     u.c_fio,
     u.f_subdivision,
+    u.f_division,
     max(_sd.c_name) AS c_subdivision,
     ( WITH RECURSIVE tab_rec AS (
                  SELECT sd_divisions.id AS id_parent,

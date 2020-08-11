@@ -3,7 +3,8 @@ CREATE TABLE core.sd_subdivisions (
 	f_division integer NOT NULL,
 	n_code integer,
 	c_name text NOT NULL,
-	b_disabled boolean NOT NULL DEFAULT false
+	b_disabled boolean DEFAULT false NOT NULL,
+	c_email text
 );
 
 ALTER TABLE core.sd_subdivisions OWNER TO mobnius;
@@ -19,6 +20,8 @@ COMMENT ON COLUMN core.sd_subdivisions.n_code IS '[e30] Код';
 COMMENT ON COLUMN core.sd_subdivisions.c_name IS '[e20|d] Наименование';
 
 COMMENT ON COLUMN core.sd_subdivisions.b_disabled IS '[e10] Отключено';
+
+COMMENT ON COLUMN core.sd_subdivisions.c_email IS 'Список адресов для рассылки';
 
 --------------------------------------------------------------------------------
 

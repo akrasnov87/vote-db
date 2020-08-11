@@ -40,6 +40,10 @@ COMMENT ON COLUMN dbo.cs_answer.f_role IS 'Конкретно для указа�
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cs_answer_color_idx ON dbo.cs_answer USING btree (c_color);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cs_answer_trigger
 	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_answer
 	FOR EACH ROW

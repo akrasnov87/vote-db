@@ -14,7 +14,8 @@ CREATE TABLE core.pd_users (
 	n_uik integer,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	f_subdivision integer,
-	c_fio text
+	c_fio text,
+	f_division integer
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;

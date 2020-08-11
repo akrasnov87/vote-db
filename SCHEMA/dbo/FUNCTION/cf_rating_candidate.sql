@@ -12,7 +12,7 @@ BEGIN
     sum(u.n_today_count)::integer AS n_today_count
    FROM dbo.cv_userinroutes u
    left join core.sd_subdivisions as sd ON sd.id = u.f_subdivision
-  WHERE u.f_type = _type and u.c_claims like '%.candidate.%'
+  WHERE u.f_type = _type and u.c_claims like '%.candidate.%' and u.c_login != 'test'
   GROUP BY u.id
   ORDER BY (sum(u.n_count)) DESC;
 END

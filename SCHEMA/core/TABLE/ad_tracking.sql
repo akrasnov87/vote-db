@@ -35,6 +35,14 @@ CREATE INDEX ad_tracking_gx_geodata_index ON core.ad_tracking USING gist (gx_geo
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX ad_tracking_fn_user_idx ON core.ad_tracking USING btree (fn_user);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX ad_tracking_d_date_idx ON core.ad_tracking USING btree (d_date);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER ad_tracking_coordinates_trigger_iu
 	BEFORE INSERT OR UPDATE ON core.ad_tracking
 	FOR EACH ROW
