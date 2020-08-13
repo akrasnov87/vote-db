@@ -12,12 +12,12 @@ BEGIN
 		h.c_build_num,
 		h.n_uik,
 		h.f_subdivision,
-		(select count(*) from dbo.cs_appartament as a where a.f_house = h.id) as n_all_appartament_count,
-		(select min(a.n_number) from dbo.cs_appartament as a where a.f_house = h.id) as n_all_appartament_min,
-		(select max(a.n_number) from dbo.cs_appartament as a where a.f_house = h.id) as n_all_appartament_max,
+		(select count(*) from dbo.cs_appartament as a where a.f_house = h.id and a.b_disabled = false) as n_all_appartament_count,
+		(select min(a.n_number) from dbo.cs_appartament as a where a.f_house = h.id and a.b_disabled = false) as n_all_appartament_min,
+		(select max(a.n_number) from dbo.cs_appartament as a where a.f_house = h.id and a.b_disabled = false) as n_all_appartament_max,
 		(select array_to_json(array_agg(row_to_json(t))) from (
 			select a.f_house, a.f_main_user, max(n_number) as n_max, min(n_number) as n_min, count(*) as n_count from dbo.cs_appartament as a
-			where a.f_house = h.id and a.f_main_user is not null
+			where a.f_house = h.id and a.f_main_user is not null and a.b_disabled = false
 			group by a.f_house, a.f_main_user) as t) as f_users
 	from dbo.cs_house as h
 	inner join dbo.cs_street as s ON h.f_street = s.id) as t
