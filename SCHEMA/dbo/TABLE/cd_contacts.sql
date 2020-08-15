@@ -3,7 +3,7 @@ CREATE TABLE dbo.cd_contacts (
 	c_first_name text,
 	c_last_name text,
 	c_patronymic text,
-	fn_house uuid NOT NULL,
+	fn_street uuid NOT NULL,
 	c_appartament text NOT NULL,
 	n_rating integer,
 	c_description text,
@@ -12,7 +12,10 @@ CREATE TABLE dbo.cd_contacts (
 	fn_user integer NOT NULL,
 	jb_data jsonb,
 	c_phone text,
-	b_disabled boolean NOT NULL
+	b_disabled boolean NOT NULL,
+	c_house_num text,
+	c_house_build text,
+	n_order bigint
 );
 
 ALTER TABLE dbo.cd_contacts OWNER TO mobnius;
