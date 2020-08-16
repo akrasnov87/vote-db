@@ -1,7 +1,10 @@
 CREATE TABLE dbo.cd_uik (
 	id integer DEFAULT nextval('dbo.auto_id_cs_uik'::regclass) NOT NULL,
 	c_fio text,
-	c_email text
+	c_email text,
+	c_work_place text,
+	c_job text,
+	c_phone text
 );
 
 ALTER TABLE dbo.cd_uik OWNER TO mobnius;
