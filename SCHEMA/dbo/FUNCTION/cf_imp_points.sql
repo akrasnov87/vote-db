@@ -16,7 +16,7 @@ BEGIN
 					 'c_house_num', h.c_house_num,
 					 'c_build_num', h.c_build_num,
 					 'n_uik', h.n_uik,
-					 'n_signature_2018', a.n_signature_2018)::jsonb, coalesce(a.n_number, 0) 
+					 'n_signature_2018', a.n_signature_2018)::jsonb, a.n_number 
 	from dbo.cs_appartament as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
 	inner join dbo.cs_street as s ON s.id = h.f_street
