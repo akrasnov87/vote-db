@@ -67,6 +67,18 @@ CREATE INDEX cd_user_points_fn_point_idx ON core.cd_user_points USING btree (fn_
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_user_points_fn_user_fn_route_d_date_idx ON core.cd_user_points USING btree (fn_user, fn_route, d_date);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_user_points_fn_user_idx ON core.cd_user_points USING btree (fn_user);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_user_points_d_date_idx ON core.cd_user_points USING btree (d_date DESC NULLS LAST);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_user_points_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_user_points
 	FOR EACH ROW

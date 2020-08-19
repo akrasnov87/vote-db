@@ -50,6 +50,10 @@ CREATE INDEX cd_routes_d_date_end_idx ON core.cd_routes USING btree (d_date_end)
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_routes_f_type_idx ON core.cd_routes USING btree (f_type);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_routes_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_routes
 	FOR EACH ROW

@@ -11,15 +11,9 @@ BEGIN
 	)
 	select r.id, r.fn_route, r.fn_point, r.fn_user_point, r.fn_type, r.fn_user, r.fn_question, r.fn_answer, r.d_date, r.c_notice, r.b_warning, r.jb_data::text, r.n_order, r.dx_created, r.n_rating
 		from core.cd_userinroutes as uir
-		LEFT JOIN core.cd_routes as rt ON rt.id = uir.f_route
-		INNER JOIN results as r ON r.fn_route = rt.id
-		INNER JOIN core.pd_users as u ON r.fn_user = u.id
-		where uir.f_user = _fn_user and core.cf_old_date(rt.d_date_end);
-	--select r.id, r.fn_route, r.fn_point, r.fn_user_point, r.fn_type, r.fn_user, r.fn_question, r.fn_answer, r.d_date, r.c_notice, r.b_warning, r.jb_data::text, r.n_order, r.dx_created, r.n_rating
-    --from core.cd_userinroutes as uir
-    --LEFT JOIN core.cd_routes as rt ON rt.id = uir.f_route
-    --INNER JOIN core.cd_results as r ON r.fn_route = rt.id
-    --where uir.f_user = _fn_user and core.cf_old_date(rt.d_date_end);
+		INNER JOIN results as r ON r.fn_route = uir.f_route
+		LEFT JOIN core.cd_routes as rt ON uir.f_route = rt.id
+		where dbo.cf_old_date(rt.d_date_end);
 END
 $$;
 

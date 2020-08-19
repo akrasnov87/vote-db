@@ -2,7 +2,7 @@ CREATE TABLE core.pd_userinroles (
 	id integer DEFAULT nextval('core.auto_id_pd_userinroles'::regclass) NOT NULL,
 	f_user integer NOT NULL,
 	f_role integer NOT NULL,
-	sn_delete boolean NOT NULL DEFAULT false
+	sn_delete boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE core.pd_userinroles OWNER TO mobnius;
@@ -16,6 +16,14 @@ COMMENT ON COLUMN core.pd_userinroles.f_user IS '[e30] Пользователь'
 COMMENT ON COLUMN core.pd_userinroles.f_role IS '[e20] Роль';
 
 COMMENT ON COLUMN core.pd_userinroles.sn_delete IS '[e10] Удален';
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX pd_userinroles_f_role ON core.pd_userinroles USING btree (f_role);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX pd_userinroles_f_user ON core.pd_userinroles USING btree (f_user);
 
 --------------------------------------------------------------------------------
 

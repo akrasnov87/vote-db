@@ -54,6 +54,22 @@ CREATE INDEX cd_results_fn_route_idx ON core.cd_results USING btree (fn_route);
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_results_fn_point_idx ON core.cd_results USING btree (fn_point);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_results_d_date_idx ON core.cd_results USING btree (d_date DESC NULLS LAST);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_results_fn_user_idx ON core.cd_results USING btree (fn_user);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_results_fn_answer_idx ON core.cd_results USING btree (fn_answer);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_results_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_results
 	FOR EACH ROW
