@@ -14,7 +14,8 @@ CREATE TABLE core.cd_user_points (
 	jb_data jsonb,
 	d_date_check timestamp with time zone,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
-	d_date timestamp with time zone NOT NULL
+	d_date timestamp with time zone NOT NULL,
+	b_disabled boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE core.cd_user_points OWNER TO mobnius;
@@ -79,10 +80,25 @@ CREATE INDEX cd_user_points_d_date_idx ON core.cd_user_points USING btree (d_dat
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_user_points_b_disabled_idx ON core.cd_user_points USING btree (b_disabled);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_user_points_fn_user_b_disabled_idx ON core.cd_user_points USING btree (fn_user, b_disabled);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_user_points_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_user_points
 	FOR EACH ROW
 	EXECUTE PROCEDURE core.cft_0_log_action();
+
+--------------------------------------------------------------------------------
+
+CREATE TRIGGER cd_user_points_trigger
+	BEFORE INSERT OR UPDATE ON core.cd_user_points
+	FOR EACH ROW
+	EXECUTE PROCEDURE core.cft_cd_user_points_trigger();
 
 --------------------------------------------------------------------------------
 

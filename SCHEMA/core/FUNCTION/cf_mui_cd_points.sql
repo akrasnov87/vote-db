@@ -2,11 +2,14 @@ CREATE OR REPLACE FUNCTION core.cf_mui_cd_points(_fn_user integer) RETURNS TABLE
     LANGUAGE plpgsql STABLE
     AS $$
 BEGIN
-    RETURN QUERY select p.id, p.f_appartament, p.f_route, p.c_notice, p.c_info, p.jb_data::text, p.dx_created, p.n_order, p.n_priority
-    from core.cd_userinroutes as uir
-    INNER JOIN core.cd_routes as r ON r.id = uir.f_route
-	LEFT JOIN core.cd_points as p ON p.f_route = r.id
-    where uir.f_user = _fn_user and dbo.cf_old_date(r.d_date_end);
+	RETURN QUERY WITH items as (
+		select uir.f_route from core.cd_userinroutes as uir
+		INNER JOIN core.cd_routes as r ON r.id = uir.f_route
+		where uir.f_user = _fn_user and dbo.cf_old_date(r.d_date_end)
+	) 
+	select p.id, p.f_appartament, p.f_route, p.c_notice, p.c_info, p.jb_data::text, p.dx_created, p.n_order, p.n_priority
+	from core.cd_points as p
+	where p.f_route IN (select i.f_route from items as i);
 END
 $$;
 

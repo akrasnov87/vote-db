@@ -2,18 +2,14 @@ CREATE OR REPLACE FUNCTION core.cf_mui_cd_results(_fn_user integer) RETURNS TABL
     LANGUAGE plpgsql STABLE
     AS $$
 BEGIN
-	RETURN QUERY WITH results as (select * from core.cd_results as r
-		where r.id IN (
-		select max(r.id::text)::uuid from core.cd_results as r
-		where r.fn_user = _fn_user
-		group by r.fn_point
-		order by max(r.d_date) desc)
+	RETURN QUERY WITH items as (
+		select uir.f_route from core.cd_userinroutes as uir
+		INNER JOIN core.cd_routes as r ON r.id = uir.f_route
+		where uir.f_user = _fn_user and dbo.cf_old_date(r.d_date_end)
 	)
 	select r.id, r.fn_route, r.fn_point, r.fn_user_point, r.fn_type, r.fn_user, r.fn_question, r.fn_answer, r.d_date, r.c_notice, r.b_warning, r.jb_data::text, r.n_order, r.dx_created, r.n_rating
-		from core.cd_userinroutes as uir
-		INNER JOIN results as r ON r.fn_route = uir.f_route
-		LEFT JOIN core.cd_routes as rt ON uir.f_route = rt.id
-		where dbo.cf_old_date(rt.d_date_end);
+	from core.cd_results as r
+	where r.fn_route IN (select i.f_route from items as i) and r.b_disabled = false;
 END
 $$;
 

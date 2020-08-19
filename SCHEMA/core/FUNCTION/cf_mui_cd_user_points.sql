@@ -2,19 +2,12 @@ CREATE OR REPLACE FUNCTION core.cf_mui_cd_user_points(_fn_user integer) RETURNS 
     LANGUAGE plpgsql STABLE
     AS $$
 BEGIN
-    RETURN QUERY WITH points as (select * from core.cd_user_points as p
-		where p.id IN (
-		select max(p.id::text)::uuid from core.cd_user_points as p
-		where p.fn_user = _fn_user
-		group by p.fn_point
-		order by max(p.d_date) desc)
-	)
-	select up.id, up.fn_point, up.fn_user, u.c_login as c_user, up.fn_route, up.fn_type, up.jb_tel::text, up.jb_email::text, up.n_longitude, up.n_latitude, up.c_notice, up.b_check, up.jb_data::text, up.d_date_check, up.dx_created, up.d_date
+    RETURN QUERY select up.id, up.fn_point, up.fn_user, u.c_login as c_user, up.fn_route, up.fn_type, up.jb_tel::text, up.jb_email::text, up.n_longitude, up.n_latitude, up.c_notice, up.b_check, up.jb_data::text, up.d_date_check, up.dx_created, up.d_date
 		from core.cd_userinroutes as uir
 		LEFT JOIN core.cd_routes as rt ON rt.id = uir.f_route
-		INNER JOIN points as up ON up.fn_route = rt.id
+		INNER JOIN core.cd_user_points as up ON up.fn_route = rt.id
 		INNER JOIN core.pd_users as u ON up.fn_user = u.id
-		where dbo.cf_old_date(rt.d_date_end);
+		where up.fn_user = _fn_user and up.b_disabled = false and dbo.cf_old_date(rt.d_date_end);
 END
 $$;
 

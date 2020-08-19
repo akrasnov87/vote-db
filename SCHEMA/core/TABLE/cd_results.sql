@@ -13,7 +13,8 @@ CREATE TABLE core.cd_results (
 	jb_data jsonb,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	n_order integer NOT NULL,
-	n_rating integer
+	n_rating integer,
+	b_disabled boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE core.cd_results OWNER TO mobnius;
@@ -70,10 +71,25 @@ CREATE INDEX cd_results_fn_answer_idx ON core.cd_results USING btree (fn_answer)
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_results_fn_user_d_disabled_idx ON core.cd_results USING btree (fn_user, b_disabled);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_results_b_disabled_idx ON core.cd_results USING btree (b_disabled);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_results_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_results
 	FOR EACH ROW
 	EXECUTE PROCEDURE core.cft_0_log_action();
+
+--------------------------------------------------------------------------------
+
+CREATE TRIGGER cd_results_trigger
+	BEFORE INSERT OR UPDATE ON core.cd_results
+	FOR EACH ROW
+	EXECUTE PROCEDURE core.cft_cd_results_trigger();
 
 --------------------------------------------------------------------------------
 
