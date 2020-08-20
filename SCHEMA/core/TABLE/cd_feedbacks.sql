@@ -46,3 +46,13 @@ CREATE TRIGGER cd_feedbacks_1
 
 ALTER TABLE core.cd_feedbacks
 	ADD CONSTRAINT cd_feedbacks_pkey PRIMARY KEY (id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE core.cd_feedbacks
+	ADD CONSTRAINT cd_feedbacks_fn_user FOREIGN KEY (fn_user) REFERENCES core.pd_users(id) NOT VALID;
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE core.cd_feedbacks
+	ADD CONSTRAINT cd_feedbacks_fn_type FOREIGN KEY (fn_type) REFERENCES core.cs_feedback_types(id) NOT VALID;

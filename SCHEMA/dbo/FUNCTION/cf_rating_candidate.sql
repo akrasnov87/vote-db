@@ -1,20 +1,18 @@
-CREATE OR REPLACE FUNCTION dbo.cf_rating_candidate(_type integer) RETURNS TABLE(user_id integer, c_login text, f_subdivision integer, c_subdivision text, n_all integer, n_count integer, n_today_count integer)
+CREATE OR REPLACE FUNCTION dbo.cf_rating_candidate(_type integer) RETURNS TABLE(user_id integer, c_login text, f_subdivision integer, c_subdivision text, n_all bigint, n_count bigint, n_today_count bigint)
     LANGUAGE plpgsql STABLE
     AS $$
 BEGIN
-    RETURN QUERY  
-	SELECT max(u.id) AS user_id,
-    max(u.c_fio) AS c_login,
-    max(u.f_subdivision) AS f_subdivision,
-	max(sd.c_name) as c_subdivision,
-    sum(u.n_all)::integer AS n_all,
-    sum(u.n_count)::integer AS n_count,
-    sum(u.n_today_count)::integer AS n_today_count
-   FROM dbo.cv_userinroutes u
-   left join core.sd_subdivisions as sd ON sd.id = u.f_subdivision
-  WHERE u.f_type = _type and u.c_claims like '%.candidate.%' and u.c_login != 'test'
-  GROUP BY u.id
-  ORDER BY (sum(u.n_count)) DESC;
+    RETURN QUERY select * from (SELECT u.id AS user_id,
+    u.c_fio AS c_login,
+    u.f_subdivision AS f_subdivision,
+	sd.c_name as c_subdivision,
+	(select core.cf_mui_cd_points_count(u.id, 0)) AS n_all,
+	(select core.cf_mui_cd_results_count(u.id)) AS n_count,
+	(select core.cf_mui_cd_results_count(u.id, CURRENT_DATE)) AS n_today_count
+  FROM core.pv_users as u
+  left join core.sd_subdivisions as sd ON sd.id = u.f_subdivision
+  WHERE u.c_claims like '%.candidate.%' and u.c_login != 'test') as t
+  order by n_count DESC;
 END
 $$;
 
