@@ -1,18 +1,17 @@
-CREATE OR REPLACE FUNCTION dbo.cf_rating_candidate(_type integer) RETURNS TABLE(user_id integer, c_login text, f_subdivision integer, c_subdivision text, n_all bigint, n_count bigint, n_today_count bigint)
+CREATE OR REPLACE FUNCTION dbo.cf_rating_candidate(_type integer) RETURNS TABLE(user_id integer, c_login text, f_subdivision integer, c_subdivision text, n_all integer, n_count integer, n_today_count integer)
     LANGUAGE plpgsql STABLE
     AS $$
 BEGIN
-    RETURN QUERY select * from (SELECT u.id AS user_id,
-    u.c_fio AS c_login,
-    u.f_subdivision AS f_subdivision,
-	sd.c_name as c_subdivision,
-	(select core.cf_mui_cd_points_count(u.id, 0)) AS n_all,
-	(select core.cf_mui_cd_results_count(u.id)) AS n_count,
-	(select core.cf_mui_cd_results_count(u.id, CURRENT_DATE)) AS n_today_count
-  FROM core.pv_users as u
-  left join core.sd_subdivisions as sd ON sd.id = u.f_subdivision
-  WHERE u.c_claims like '%.candidate.%' and u.c_login != 'test') as t
-  order by n_count DESC;
+    RETURN QUERY SELECT r.user_id,
+    r.c_login,
+    r.f_subdivision,
+	r.c_subdivision,
+    r.n_all::integer AS n_all,
+    r.n_count::integer AS n_count,
+   	r.n_today_count::integer AS n_today_count
+   FROM dbo.msv_rating as r
+  WHERE r.c_claims like '%.candidate.%' and r.c_login != 'test'
+  ORDER BY r.n_count DESC;
 END
 $$;
 
