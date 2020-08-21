@@ -27,6 +27,13 @@ BEGIN
 		END IF;
 		
 	ELSE
+		IF _house is not NULL AND _userid is null THEN
+			update dbo.cs_appartament
+			set f_main_user = null
+			where f_house = _house;
+			_result = 0;
+		END IF;
+		
 		_result = 1;
 	END IF;
 	RETURN _result;

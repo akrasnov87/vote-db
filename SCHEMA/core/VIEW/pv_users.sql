@@ -10,6 +10,7 @@ CREATE VIEW core.pv_users AS
     COALESCE(u.c_fio, u.c_login) AS c_fio,
     u.f_subdivision,
     u.f_division,
+    max(_sd.f_division) AS f_subdivision_f_division,
     max(_sd.c_name) AS c_subdivision,
     ( WITH RECURSIVE tab_rec AS (
                  SELECT sd_divisions.id AS id_parent,
