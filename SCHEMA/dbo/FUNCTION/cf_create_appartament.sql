@@ -13,10 +13,16 @@ BEGIN
 			IF _appartament_start is not null AND _appartamnt_finish is not null THEN
 			
 				insert into dbo.cs_appartament(f_house, c_number, n_number)
-				SELECT _house, s.a::text, s.a  FROM generate_series(_appartament_start,_appartamnt_finish) AS s(a);
+				SELECT _house, s.a::text, s.a  FROM generate_series(_appartament_start, _appartamnt_finish) AS s(a);
 		
 				_result = 0;
 			ELSE
+				IF _appartament_start is not null AND _appartamnt_finish is null THEN
+					insert into dbo.cs_appartament(f_house, c_number, n_number)
+					SELECT _house, _appartament_start::text, _appartament_start;
+		
+					_result = 0;
+				END IF;
 				_result = 3;
 			END IF;
 		

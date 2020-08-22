@@ -4,7 +4,7 @@ CREATE OR REPLACE FUNCTION dbo.cf_enabled_appartament(_userid integer, _house uu
 DECLARE
 	_result integer;
 BEGIN
-	IF _house is not NULL AND _userid is not null THEN
+	IF _house is not NULL THEN
 	
 		IF _appartament_start is null AND _appartamnt_finish is null THEN
 			update dbo.cs_appartament
