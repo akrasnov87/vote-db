@@ -21,7 +21,15 @@ BEGIN
 
 				_result = 0;
 			ELSE
-				_result = 2;
+				IF _appartament_start is not null and _appartamnt_finish is null THEN
+					update dbo.cs_appartament
+					set b_disabled = false
+					where f_house = _house and id IN (select a1.id from dbo.cs_appartament as a1 where a1.n_number = _appartament_start order by a1.dx_date DESC limit 1);
+
+					_result = 0;
+				ELSE
+					_result = 2;
+				END IF;
 			END IF;
 		
 		END IF;

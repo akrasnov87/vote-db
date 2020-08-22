@@ -17,10 +17,12 @@ CREATE VIEW dbo.cv_house AS
         END AS b_fail,
     ( SELECT count(*) AS count
            FROM dbo.cs_appartament a
-          WHERE (a.f_house = h.id)) AS n_appartament,
+          WHERE ((a.f_house = h.id) AND (a.b_disabled = false))) AS n_appartament,
     ( SELECT (count(*) = 1)
            FROM dbo.cs_appartament a
-          WHERE (a.f_house = h.id)) AS b_private
+          WHERE ((a.f_house = h.id) AND (a.b_disabled = false))) AS b_private,
+    h.b_disabled,
+    s.b_disabled AS street_b_disabled
    FROM ((dbo.cs_house h
      JOIN dbo.cs_street s ON ((h.f_street = s.id)))
      LEFT JOIN core.sd_subdivisions sd ON ((sd.id = h.f_subdivision)))
