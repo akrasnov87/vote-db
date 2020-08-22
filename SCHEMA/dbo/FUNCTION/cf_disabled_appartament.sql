@@ -25,7 +25,6 @@ BEGIN
 					update dbo.cs_appartament
 					set b_disabled = true
 					where f_house = _house and id IN (select a1.id from dbo.cs_appartament as a1 where a1.f_house = _house and a1.n_number = _appartament_start and a1.b_disabled = false order by a1.dx_date DESC limit 1);
-
 					_result = 20;
 				ELSE
 					_result = 2;
