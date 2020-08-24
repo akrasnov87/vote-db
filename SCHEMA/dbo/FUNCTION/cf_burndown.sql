@@ -7,6 +7,7 @@ BEGIN
 		(SELECT date_trunc('day', up.d_date))::date as d_date
 	from core.cf_mui_cd_user_points(_userId) as up
 	inner join core.cd_routes as r ON up.fn_route = r.id
+	left join core.cd_points as p ON p.id = up.fn_point and p.n_priority > 0
 	group by (SELECT date_trunc('day', up.d_date))
 	order by (SELECT date_trunc('day', up.d_date)) asc;
 END
