@@ -9,7 +9,7 @@ BEGIN
 	where p.id = _point_id;
 
 	select array_to_string(array(
-	select (concat('<p><b>', to_char(r.d_date, 'DD.MM.YYYY HH24:MI'), '</b> ', coalesce(u.c_fio, concat('Агитатор ', u.c_login)), '<br />', a.c_text, ' ', coalesce(r.n_rating, '0'), '★</p>')) as c_txt
+	select (concat('<p><b>', to_char(r.d_date, 'DD.MM.YYYY HH24:MI'), '</b> ', coalesce(u.c_fio, concat('Агитатор ', u.c_login)), '<br />', a.c_text, ' (', coalesce(r.n_rating, '0'), '★)</p>')) as c_txt
 	from core.cd_results as r
 	inner join core.cd_points as p ON p.id = r.fn_point
 	inner join dbo.cs_answer as a ON a.id = r.fn_answer

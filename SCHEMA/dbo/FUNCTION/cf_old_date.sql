@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION dbo.cf_old_date(d_date date) RETURNS boolean
     LANGUAGE plpgsql IMMUTABLE STRICT
     AS $$
 BEGIN
-	return d_date >= now();
+	return (d_date + interval '1 day') >= now();
 END
 $$;
 

@@ -5,7 +5,7 @@ BEGIN
 	
 	return query select
 		u.c_login,
-		dbo.cf_imp_by_user(r.f_user, 1, now()::date, _limit_date) as status
+		dbo.cf_imp_by_user(r.f_user, 3, now()::date, _limit_date) as status
 	from (select f_user
 					from core.pd_userinroles
 					where f_role = 5

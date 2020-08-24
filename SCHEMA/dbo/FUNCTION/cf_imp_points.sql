@@ -17,12 +17,12 @@ BEGIN
 					 'c_build_num', h.c_build_num,
 					 'n_uik', h.n_uik,
 					 'n_signature_2018', a.n_signature_2018)::jsonb, coalesce(a.n_number, 0) 
-	from dbo.cs_appartament as a
+	from dbo.msv_appartament2 as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
 	inner join dbo.cs_street as s ON s.id = h.f_street
 	where f_main_user = _user_id and f_house = _f_house;
 	
-	_result = (select count(*) from dbo.cs_appartament where f_main_user = _user_id and f_house = _f_house);
+	_result = (select count(*) from dbo.msv_appartament2 where f_main_user = _user_id and f_house = _f_house);
 	RETURN _result;
 END
 $$;
@@ -52,12 +52,12 @@ BEGIN
 					 'c_build_num', h.c_build_num,
 					 'n_uik', h.n_uik,
 					 'n_signature_2018', a.n_signature_2018)::jsonb, coalesce(a.n_number, 0) 
-	from dbo.cs_appartament as a
+	from dbo.msv_appartament2 as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
 	inner join dbo.cs_street as s ON s.id = h.f_street
 	where f_main_user = _user_id and f_house = _f_house and a.n_number between _appartament_start and _appartament_end;
 	
-	_result = (select count(*) from dbo.cs_appartament where f_main_user = _user_id and f_house = _f_house and n_number between _appartament_start and _appartament_end);
+	_result = (select count(*) from dbo.msv_appartament2 where f_main_user = _user_id and f_house = _f_house and n_number between _appartament_start and _appartament_end);
 	RETURN _result;
 END
 $$;
