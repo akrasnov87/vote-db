@@ -7,8 +7,7 @@ CREATE TABLE core.cd_points (
 	jb_data jsonb,
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	n_order integer NOT NULL,
-	n_priority integer,
-	b_double boolean DEFAULT false NOT NULL
+	n_priority integer
 );
 
 ALTER TABLE core.cd_points OWNER TO mobnius;
@@ -44,10 +43,6 @@ CREATE INDEX cd_points_f_appartament_idx ON core.cd_points USING btree (f_appart
 --------------------------------------------------------------------------------
 
 CREATE INDEX cd_points_f_route_n_priority_idx ON core.cd_points USING btree (f_route, n_priority);
-
---------------------------------------------------------------------------------
-
-CREATE INDEX cd_points_b_double_idx ON core.cd_points USING btree (b_double);
 
 --------------------------------------------------------------------------------
 

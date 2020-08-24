@@ -5,7 +5,7 @@ BEGIN
 	
 	return query select 
 		u.c_login,
-		dbo.cf_imp_by_user(u.id, 2, now()::date, _limit_date) as status
+		dbo.cf_imp_by_user(u.id, 3, now()::date, _limit_date) as status
 	from core.pv_users as u
 	where c_claims = '.inspector.' and u.f_subdivision = subdivision;
 END

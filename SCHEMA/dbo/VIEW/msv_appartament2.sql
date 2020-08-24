@@ -28,7 +28,7 @@ CREATE MATERIALIZED VIEW dbo.msv_appartament2 AS
                      JOIN core.cd_routes r ON ((rr.fn_route = r.id)))
                      JOIN core.cd_points p ON ((p.id = rr.fn_point)))
                      JOIN dbo.cs_appartament a ON ((a.id = p.f_appartament)))
-                  WHERE ((r.f_type = 2) AND (rr.n_rating >= 8))))) t
+                  WHERE ((r.f_type <> 1) AND (rr.n_rating >= 8))))) t
   WHERE (NOT (t.id IN ( SELECT p.f_appartament
            FROM ((core.cd_results rr
              JOIN core.cd_routes r ON ((rr.fn_route = r.id)))

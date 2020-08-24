@@ -28,10 +28,6 @@ BEGIN
 	get diagnostics _dg_cnt = row_count;
 	_dg_text = _dg_text || ' core.ad_audits: удалено '|| _dg_cnt::text || E'\n';
 
-    delete from core.cd_notifications where d_date < _d_data;
-	get diagnostics _dg_cnt = row_count;
-	_dg_text = _dg_text || ' core.cd_notifications: удалено '|| _dg_cnt::text || E'\n';
-
     delete from core.ad_mobile_devices where d_date < _d_data;
 	get diagnostics _dg_cnt = row_count;
 	_dg_text = _dg_text || ' core.ad_mobile_devices: удалено '|| _dg_cnt::text || E'\n';
@@ -43,10 +39,18 @@ BEGIN
     delete from core.ad_tracking where d_date < _d_data;
 	get diagnostics _dg_cnt = row_count;
 	_dg_text = _dg_text || ' core.ad_tracking: удалено '|| _dg_cnt::text || E'\n';
+	
+	delete from core.sd_client_errors where d_created < _d_data;
+	get diagnostics _dg_cnt = row_count;
+	_dg_text = _dg_text || ' core.sd_client_errors: удалено '|| _dg_cnt::text || E'\n';
 
 	delete from core.cd_action_log where d_date < _d_data;
 	get diagnostics _dg_cnt = row_count;
 	_dg_text = _dg_text || ' core.cd_action_log: удалено '|| _dg_cnt::text || E'\n';
+	
+	delete from core.cd_feedbacks where d_date_question < _d_data;
+	get diagnostics _dg_cnt = row_count;
+	_dg_text = _dg_text || ' core.cd_feedbacks: удалено '|| _dg_cnt::text || E'\n';
 
 	insert into core.cd_sys_log(d_timestamp, c_descr)
 	values(clock_timestamp(), 'Очистка таблиц выполнена. ' || E'\n' || _dg_text);
