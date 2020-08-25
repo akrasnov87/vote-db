@@ -23,7 +23,7 @@ BEGIN
 						from dbo.msv_appartament2 as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
 	inner join dbo.cs_street as s ON s.id = h.f_street
-	where a.f_house = _f_house and a.id not in (
+	where a.f_house = _f_house and a.b_disabled = false and a.id not in (
 	select p.f_appartament from core.cd_points as p
 	where p.f_route = _route_id);
 

@@ -23,7 +23,7 @@ BEGIN
 	    s.b_disabled as street_b_disabled
 	from dbo.cs_house as h
 	inner join dbo.cs_street as s ON h.f_street = s.id) as t
-	where t.f_subdivision = _subdivision
+	where t.f_subdivision = _subdivision and t.b_disabled = false
 		   order by t.c_street_name, t.c_house_num, t.c_build_num;
 END
 $$;
