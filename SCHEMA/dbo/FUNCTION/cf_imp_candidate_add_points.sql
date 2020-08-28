@@ -5,7 +5,7 @@ DECLARE
 	_result integer;
 BEGIN
 	insert into core.cd_points(f_appartament, f_route, c_notice, c_info, jb_data, n_order, n_priority)
-	select a.id, _route_id, 'auto', null, json_build_object('c_appartament_num', a.c_number, 
+	select a.id, _route_id, 'auto append candidate', null, json_build_object('c_appartament_num', a.c_number, 
 							  'n_appartament_num', a.n_number,
 							 'c_address', concat(s.c_short_type, ' ', s.c_name),
 							 'f_division', s.f_division,
@@ -23,7 +23,7 @@ BEGIN
 						from dbo.cs_appartament as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
 	inner join dbo.cs_street as s ON s.id = h.f_street
-	where a.f_house = _f_house and a.id not in (
+	where a.f_house = _f_house and a.b_disabled = false and a.id not in (
 	select p.f_appartament from core.cd_points as p
 	where p.f_route = _route_id);
 

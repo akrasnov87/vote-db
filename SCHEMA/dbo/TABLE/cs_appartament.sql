@@ -38,6 +38,14 @@ CREATE INDEX cs_appartament_f_user_idx ON dbo.cs_appartament USING btree (f_user
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cs_appartament_b_disabled_f_house_c_numer_idx ON dbo.cs_appartament USING btree (b_disabled, f_house, c_number);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cs_appartament_b_disabled_idx ON dbo.cs_appartament USING btree (b_disabled);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cs_apartment_trigger
 	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_appartament
 	FOR EACH ROW

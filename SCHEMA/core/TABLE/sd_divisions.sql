@@ -6,7 +6,8 @@ CREATE TABLE core.sd_divisions (
 	n_code integer,
 	b_disabled boolean DEFAULT false NOT NULL,
 	c_email text,
-	c_email_agitator text
+	c_email_agitator text,
+	c_email_agitator_v2 text
 );
 
 ALTER TABLE core.sd_divisions OWNER TO mobnius;

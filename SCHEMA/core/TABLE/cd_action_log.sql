@@ -23,3 +23,7 @@ COMMENT ON COLUMN core.cd_action_log.jb_new_value IS '[e30] новые данн�
 COMMENT ON COLUMN core.cd_action_log.c_user IS '[e20] учетная запись';
 
 COMMENT ON COLUMN core.cd_action_log.d_date IS '[e10] дата события';
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX cd_action_log_c_table_name_c_operation_idx ON core.cd_action_log USING btree (c_table_name, c_operation);
