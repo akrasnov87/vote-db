@@ -15,13 +15,15 @@ BEGIN
 				insert into dbo.cs_appartament(f_house, c_number, n_number)
 				SELECT _house, s.a::text, s.a FROM generate_series(_appartament_start, _appartamnt_finish) AS s(a)
 				where s.a::text not IN (select a.c_number from dbo.cs_appartament as a where a.f_house = _house);
-		
+				PERFORM dbo.cf_enabled_appartament(null, _house, _appartament_start, _appartamnt_finish);
 				_result = 10;
 			ELSE
 				IF _appartament_start is not null AND _appartamnt_finish is null THEN
 					insert into dbo.cs_appartament(f_house, c_number, n_number)
 					SELECT _house, _appartament_start::text, _appartament_start
 					where _appartament_start::text not IN (select a.c_number from dbo.cs_appartament as a where a.f_house = _house);
+					
+					PERFORM dbo.cf_enabled_appartament(null, _house, _appartament_start, null);
 		
 					_result = 20;
 				ELSE

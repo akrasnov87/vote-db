@@ -7,7 +7,7 @@ BEGIN
 		LEFT JOIN core.cd_routes as rt ON rt.id = uir.f_route
 		INNER JOIN core.cd_user_points as up ON up.fn_route = rt.id
 		INNER JOIN core.pd_users as u ON up.fn_user = u.id
-		where up.fn_user = _fn_user and up.b_disabled = false and dbo.cf_old_date(rt.d_date_end);
+		where up.fn_user = _fn_user and up.b_disabled = false and now()::date >= rt.d_date_start and dbo.cf_old_date(rt.d_date_end);
 END
 $$;
 

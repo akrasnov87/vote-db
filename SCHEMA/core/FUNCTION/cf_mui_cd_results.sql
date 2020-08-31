@@ -5,7 +5,7 @@ BEGIN
 	RETURN QUERY WITH items as (
 		select uir.f_route from core.cd_userinroutes as uir
 		INNER JOIN core.cd_routes as r ON r.id = uir.f_route
-		where uir.f_user = _fn_user and dbo.cf_old_date(r.d_date_end)
+		where uir.f_user = _fn_user and now()::date >= r.d_date_start and dbo.cf_old_date(r.d_date_end)
 	)
 	select r.id, r.fn_route, r.fn_point, r.fn_user_point, r.fn_type, r.fn_user, r.fn_question, r.fn_answer, r.d_date, r.c_notice, r.b_warning, r.jb_data::text, r.n_order, r.dx_created, r.n_rating
 	from core.cd_results as r

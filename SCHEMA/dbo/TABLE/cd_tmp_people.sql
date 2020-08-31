@@ -61,5 +61,9 @@ CREATE INDEX cd_tmp_people_f_street_idx ON dbo.cd_tmp_people USING btree (f_stre
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_tmp_people_dx_created_idx ON dbo.cd_tmp_people USING btree (dx_created);
+
+--------------------------------------------------------------------------------
+
 ALTER TABLE dbo.cd_tmp_people
 	ADD CONSTRAINT cd_tmp_people_pkey PRIMARY KEY (id);

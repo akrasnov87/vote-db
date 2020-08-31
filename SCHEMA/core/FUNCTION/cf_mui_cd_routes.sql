@@ -12,7 +12,7 @@ BEGIN
 	r.n_order
     from core.cd_userinroutes as uir
     LEFT JOIN core.cd_routes as r ON r.id = uir.f_route
-    where uir.f_user = _fn_user and dbo.cf_old_date(r.d_date_end); -- не старше текущей даты
+    where uir.f_user = _fn_user and now()::date >= r.d_date_start and dbo.cf_old_date(r.d_date_end); -- не старше текущей даты
 END
 $$;
 
