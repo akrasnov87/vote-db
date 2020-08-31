@@ -7,7 +7,7 @@ BEGIN
 	WITH items as (
 		select uir.f_route from core.cd_userinroutes as uir
 		INNER JOIN core.cd_routes as r ON r.id = uir.f_route
-		where uir.f_user = _fn_user and dbo.cf_old_date(r.d_date_end)
+		where uir.f_user = _fn_user and now()::date >= r.d_date_start and dbo.cf_old_date(r.d_date_end)
 	)
 	select count(*) into _count from core.cd_points as p
 	where p.f_route IN (select i.f_route from items as i);
