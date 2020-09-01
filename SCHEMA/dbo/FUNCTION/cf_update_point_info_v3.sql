@@ -10,7 +10,7 @@ BEGIN
 	select p.f_appartament into _f_appartament from core.cd_points as p
 	where p.id = _point_id;
 
-	select string_agg(concat(p.c_first_name, ' ', p.c_last_name, ' ', p.c_patronymic), '<br />') into _c_info from dbo.cd_people as p
+	select string_agg(concat(' - ', p.c_first_name, ' ', p.c_last_name, ' ', p.c_patronymic), '<br />') into _c_info from dbo.cd_people as p
 	where p.f_type = 7 and p.f_appartament = _f_appartament;
 
 	select string_agg(concat(p.c_first_name, ' ', p.c_last_name, ' ', p.c_patronymic), ', ') into _c_peoples 
@@ -33,7 +33,7 @@ BEGIN
 	where a.id = _f_appartament;
 
 	update core.cd_points as p
-	set c_info = concat('<p>Подпись за Николаева:<br />', _c_info, '</p>'),
+	set c_info = concat('<p><b>Подпись за Николаева</b>:<br />', _c_info, '</p>'),
 	jb_data = _jb_data
 	where p.id = _point_id;
 	
