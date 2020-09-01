@@ -40,7 +40,7 @@ BEGIN
 	
 	_result = concat('<p><b>«', _c_fio,'»</b>, доброго времени суток!<p>');
 	_result = concat(_result, '<p>Кол-во квартир – ', _n_count::text, ' (100%)<br />');
-	_result = concat(_result, '<br /> - кол-во пройденных квартир – ', _n_result, ' (', (_n_result * 100 / _n_count), '%)');
+	_result = concat(_result, '<br /> - кол-во пройденных квартир – ', _n_result, ' (', (_n_result * 100 / CASE WHEN _n_count = 0 THEN 1 ELSE _n_count END), '%)');
 	_result = concat(_result, '<br /> - никого нет дома – ', _not_count, ' (', (_not_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
 	_result = concat(_result, '<br /> - отказ открывать дверь – ', _not_open_count, ' (', (_not_open_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
 	_result = concat(_result, '<br /> - открыли – АПМ НЕ вручен в руки – ', _open1_count, ' (', (_open1_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
