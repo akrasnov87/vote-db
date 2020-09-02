@@ -12,15 +12,15 @@ BEGIN
 			
 			IF _appartament_start is not null AND _appartamnt_finish is not null THEN
 			
-				insert into dbo.cs_appartament(f_house, c_number, n_number)
-				SELECT _house, s.a::text, s.a FROM generate_series(_appartament_start, _appartamnt_finish) AS s(a)
+				insert into dbo.cs_appartament(f_house, c_number, n_number, n_signature_2018)
+				SELECT _house, s.a::text, s.a, 0 FROM generate_series(_appartament_start, _appartamnt_finish) AS s(a)
 				where s.a::text not IN (select a.c_number from dbo.cs_appartament as a where a.f_house = _house);
 				PERFORM dbo.cf_enabled_appartament(null, _house, _appartament_start, _appartamnt_finish);
 				_result = 10;
 			ELSE
 				IF _appartament_start is not null AND _appartamnt_finish is null THEN
-					insert into dbo.cs_appartament(f_house, c_number, n_number)
-					SELECT _house, _appartament_start::text, _appartament_start
+					insert into dbo.cs_appartament(f_house, c_number, n_number, n_signature_2018)
+					SELECT _house, _appartament_start::text, _appartament_start, 0
 					where _appartament_start::text not IN (select a.c_number from dbo.cs_appartament as a where a.f_house = _house);
 					
 					PERFORM dbo.cf_enabled_appartament(null, _house, _appartament_start, null);

@@ -25,7 +25,7 @@ BEGIN
 					 'c_house_num', h.c_house_num,
 					 'c_build_num', h.c_build_num,
 					 'n_uik', h.n_uik,
-					 'n_signature', a.n_signature_2018,
+					 'n_signature', coalesce(a.n_signature_2018, 0),
 					 'c_peoples', _c_peoples)::jsonb into _jb_data 
 	from dbo.msv_appartament3 as a
 	inner join dbo.cs_house as h ON h.id = a.f_house

@@ -6,7 +6,7 @@ CREATE TABLE dbo.cs_appartament (
 	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	f_user integer,
-	n_signature_2018 integer,
+	n_signature_2018 integer DEFAULT 0 NOT NULL,
 	f_main_user integer
 );
 
