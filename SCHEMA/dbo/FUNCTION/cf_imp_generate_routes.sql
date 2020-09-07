@@ -2,10 +2,12 @@ CREATE OR REPLACE FUNCTION dbo.cf_imp_generate_routes(_limit_date date) RETURNS 
     LANGUAGE plpgsql
     AS $$
 BEGIN
+	REFRESH MATERIALIZED VIEW dbo.msv_union_appartament;
+	REFRESH MATERIALIZED VIEW dbo.msv_appartament4;
 	
 	return query select
 		u.c_login,
-		dbo.cf_imp_by_user(r.f_user, 4, '2020-09-02'::date, _limit_date) as status
+		dbo.cf_imp_by_user(r.f_user, 6, now()::date, _limit_date) as status
 	from (select f_user
 					from core.pd_userinroles
 					where f_role = 5

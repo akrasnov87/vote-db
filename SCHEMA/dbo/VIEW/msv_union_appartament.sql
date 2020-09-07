@@ -103,4 +103,6 @@ WITH DATA;
 
 ALTER MATERIALIZED VIEW dbo.msv_union_appartament OWNER TO mobnius;
 
-COMMENT ON VIEW dbo.msv_union_appartament IS 'Для обхода по 4 волне - агитатор';
+--------------------------------------------------------------------------------
+
+CREATE INDEX msv_union_appartament_f_appartament ON dbo.msv_union_appartament USING btree (f_appartament);

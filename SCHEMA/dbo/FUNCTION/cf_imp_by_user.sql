@@ -5,16 +5,17 @@ DECLARE
 	_result integer;
 	_route_number text;
 BEGIN
-	IF (select count(*) from dbo.msv_appartament3 where f_main_user = _user_id and b_disabled = false) > 0 THEN
+	IF (select count(*) from dbo.msv_appartament4 as a
+		where a.f_main_user = _user_id and a.b_disabled = false) > 0 THEN
 		_result = ( select 
 						sum((SELECT dbo.cf_imp_points(_user_id, t.f_house, t.route_id)))
 					from (select 
-								f_house, 
-								f_main_user,
-								(SELECT dbo.cf_create_route(f_house, _user_id, _route_type_id, _date_activate, _date_limit)) as route_id
-							from dbo.msv_appartament3
-							where f_main_user = _user_id and b_disabled = false
-							group by f_house, f_main_user) as t);
+								a.f_house, 
+								a.f_main_user,
+								(SELECT dbo.cf_create_route(a.f_house, _user_id, _route_type_id, _date_activate, _date_limit)) as route_id
+							from dbo.msv_appartament4 as a
+							where a.f_main_user = _user_id and a.b_disabled = false
+							group by a.f_house, a.f_main_user) as t);
 	ELSE
 		_result = 0;
 	END IF;
