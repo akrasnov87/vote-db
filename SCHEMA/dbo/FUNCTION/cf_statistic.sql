@@ -24,19 +24,19 @@ BEGIN
 	
 	select count(*) into _not_open_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
-	where a.c_color = '#8b0000';
+	where a.c_color = '#800080';
 	
 	select count(*) into _open1_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
-	where a.c_color = '#00008b,#0000ff,#00ffff';
+	where a.c_color = '#ff0000,#0000ff,#00ff00';
 	
 	select count(*) into _open2_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
-	where a.c_color = '#808000,#006400,#00ff00';
+	where a.c_color = '#ff0000,#00ff00,#00ff00';
 	
 	select count(*) into _other_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
-	where a.c_color = '#F57F17';
+	where a.c_color = '#ffff00';
 	
 	_result = concat('<p><b>«', _c_fio,'»</b>, доброго времени суток!<p>');
 	_result = concat(_result, '<p>Кол-во квартир – ', _n_count::text, ' (100%)<br />');
