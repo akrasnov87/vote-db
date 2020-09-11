@@ -10,7 +10,8 @@ DECLARE
 	_not_open_count integer;
 	_open1_count integer;
 	_open2_count integer;
-	_other_count integer;
+	_open3_count integer;
+	_open4_count integer;
 BEGIN
 	select coalesce(u.c_fio, u.c_login) into _c_fio from core.pd_users as u
 	where u.id = _f_user;
@@ -28,13 +29,17 @@ BEGIN
 	
 	select count(*) into _open1_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
-	where a.c_color = '#ff0000,#0000ff,#00ff00';
+	where a.c_color = '#00ff00';
 	
 	select count(*) into _open2_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
-	where a.c_color = '#ff0000,#00ff00,#00ff00';
+	where a.c_color = '#00ff00';
 	
-	select count(*) into _other_count from core.cf_mui_cd_results(_f_user) as r
+	select count(*) into _open3_count from core.cf_mui_cd_results(_f_user) as r
+	inner join dbo.cs_answer as a ON r.fn_answer = a.id
+	where a.c_color = '#ff0000';
+	
+	select count(*) into _open4_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
 	where a.c_color = '#ffff00';
 	
@@ -43,9 +48,10 @@ BEGIN
 	_result = concat(_result, '<br /> - кол-во пройденных квартир – ', _n_result, ' (', (_n_result * 100 / CASE WHEN _n_count = 0 THEN 1 ELSE _n_count END), '%)');
 	_result = concat(_result, '<br /> - никого нет дома – ', _not_count, ' (', (_not_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
 	_result = concat(_result, '<br /> - отказ открывать дверь – ', _not_open_count, ' (', (_not_open_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
-	_result = concat(_result, '<br /> - открыли – АПМ НЕ вручен в руки – ', _open1_count, ' (', (_open1_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
-	_result = concat(_result, '<br /> - открыли – АПМ вручен в руки – ', _open2_count, ' (', (_open2_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
-	_result = concat(_result, '<br /> - другое – ', _other_count, ' (', (_other_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)</p>');
+	_result = concat(_result, '<br /> - дверь открыли – УЖЕ проголосовали – ', _open1_count, ' (', (_open1_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
+	_result = concat(_result, '<br /> - дверь открыли – ЕЩЕ НЕ проголосовали – ', _open2_count, ' (', (_open2_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
+	_result = concat(_result, '<br /> - дверь открыли – НЕ ПОЙДУ голосовать – ', _open3_count, ' (', (_open3_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)');
+	_result = concat(_result, '<br /> - дверь открыли – ОТКАЗ ОТВЕЧАТЬ – ', _open4_count, ' (', (_open4_count * 100 / CASE WHEN _n_result = 0 THEN 1 ELSE _n_result END), '%)</p>');
 	RETURN _result;
 END
 $$;

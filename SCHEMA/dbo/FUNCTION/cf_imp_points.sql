@@ -7,7 +7,7 @@ BEGIN
 	-- _route_id = uuid_generate_v4();
 	
 	insert into core.cd_points(f_appartament, f_route, c_notice, c_info, jb_data, n_order)
-	select a.id, _route_id, 'auto v4', null, 
+	select a.id, _route_id, 'auto v5', null, 
 	json_build_object('c_appartament_num', a.c_number, 
 					  'n_appartament_num', a.n_number,
 					 'c_address', concat(s.c_short_type, ' ', s.c_name),
@@ -17,12 +17,12 @@ BEGIN
 					 'c_build_num', h.c_build_num,
 					 'n_uik', h.n_uik,
 					 'n_signature_2018', coalesce(a.n_signature_2018, 0))::jsonb, coalesce(a.n_number, 0) 
-	from dbo.msv_appartament4 as a
+	from dbo.msv_appartament5 as a
 	inner join dbo.cs_house as h ON h.id = a.f_house
 	inner join dbo.cs_street as s ON s.id = h.f_street
 	where a.f_main_user = _user_id and a.f_house = _f_house and a.b_disabled = false;
 	
-	_result = (select count(*) from dbo.msv_appartament4 as a
+	_result = (select count(*) from dbo.msv_appartament5 as a
 			   where a.f_main_user = _user_id and a.f_house = _f_house and a.b_disabled = false);
 	RETURN _result;
 END
