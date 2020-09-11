@@ -22,7 +22,7 @@ BEGIN
 				   'jb_other', a.jb_other,
 				   'jb_er', a.jb_er,
 				   'jb_budget', a.jb_budget,
-			       'c_peoples', dbo.cf_get_point_info_v5(a.id))::jsonb, 
+			       'c_peoples', (select dbo.cf_get_point_info_v5(a.id)))::jsonb, 
 				   a.n_appartament,
 				   (CASE WHEN a.jb_food_kit is not null THEN 1 
 				   		WHEN a.jb_other is not null THEN 2

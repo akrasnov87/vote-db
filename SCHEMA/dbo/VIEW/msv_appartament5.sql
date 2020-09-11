@@ -61,3 +61,27 @@ CREATE MATERIALIZED VIEW dbo.msv_appartament5 AS
 WITH DATA;
 
 ALTER MATERIALIZED VIEW dbo.msv_appartament5 OWNER TO mobnius;
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX msv_appartament5_b_disabled_f_house_c_numer_idx ON dbo.msv_appartament5 USING btree (b_disabled, f_house, c_number);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX msv_appartament5_b_disabled_idx ON dbo.msv_appartament5 USING btree (b_disabled);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX msv_appartament5_f_house_idx ON dbo.msv_appartament5 USING btree (f_house);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX msv_appartament5_f_user_idx ON dbo.msv_appartament5 USING btree (f_user);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX msv_appartament5_f_main_user_f_house_idx ON dbo.msv_appartament5 USING btree (f_main_user, f_house);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX msv_appartament5_f_main_user_b_disabled_idx ON dbo.msv_appartament5 USING btree (f_main_user, b_disabled);
