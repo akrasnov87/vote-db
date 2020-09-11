@@ -2,9 +2,15 @@ CREATE OR REPLACE FUNCTION dbo.cf_mui_cs_answer(_fn_user integer) RETURNS TABLE(
     LANGUAGE plpgsql STABLE
     AS $$
 BEGIN
-	RETURN QUERY SELECT a.id, a.c_text, a.f_question, a.f_next_question, a.c_action, a.n_order, a.b_disabled, a.dx_created, a.sn_delete, a.c_color, a.f_role
-	FROM dbo.cs_answer as a
-	where a.f_question IN (select q.id from dbo.cf_mui_cs_question(_fn_user) as q);
+	IF _fn_user = 1000114 THEN
+		RETURN QUERY SELECT a.id, a.c_text, a.f_question, a.f_next_question, a.c_action, a.n_order, a.b_disabled, a.dx_created, a.sn_delete, a.c_color, a.f_role
+		FROM dbo.cs_answer as a
+		where a.f_question IN (42, 43, 44, 45, 46);
+	ELSE
+		RETURN QUERY SELECT a.id, a.c_text, a.f_question, a.f_next_question, a.c_action, a.n_order, a.b_disabled, a.dx_created, a.sn_delete, a.c_color, a.f_role
+		FROM dbo.cs_answer as a
+		where a.f_question IN (select q.id from dbo.cf_mui_cs_question(_fn_user) as q);
+	END IF;
 END
 $$;
 
