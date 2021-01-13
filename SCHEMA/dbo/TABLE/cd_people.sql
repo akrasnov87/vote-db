@@ -11,7 +11,8 @@ CREATE TABLE dbo.cd_people (
 	n_birth_year integer,
 	c_org text,
 	c_phone text,
-	f_type integer NOT NULL
+	f_type integer NOT NULL,
+	b_vote_2020 boolean NOT NULL
 );
 
 ALTER TABLE dbo.cd_people OWNER TO mobnius;
@@ -39,6 +40,8 @@ COMMENT ON COLUMN dbo.cd_people.c_org IS 'Наименование органи�
 COMMENT ON COLUMN dbo.cd_people.c_phone IS 'Номер телефона';
 
 COMMENT ON COLUMN dbo.cd_people.f_type IS 'Тип записи';
+
+COMMENT ON COLUMN dbo.cd_people.b_vote_2020 IS 'Голосовавший на выборах 2020';
 
 --------------------------------------------------------------------------------
 

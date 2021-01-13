@@ -33,7 +33,7 @@ BEGIN
 	
 	select count(*) into _open2_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
-	where a.c_color = '#00ff00';
+	where a.c_color = '#0000ff';
 	
 	select count(*) into _open3_count from core.cf_mui_cd_results(_f_user) as r
 	inner join dbo.cs_answer as a ON r.fn_answer = a.id
