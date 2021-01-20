@@ -12,8 +12,7 @@ CREATE TABLE core.cd_user_points (
 	d_date_check timestamp with time zone,
 	dx_created timestamp with time zone DEFAULT now(),
 	d_date timestamp with time zone NOT NULL,
-	c_telephone text,
-	b_export boolean DEFAULT false
+	b_disabled boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE core.cd_user_points OWNER TO mobnius;
@@ -45,8 +44,6 @@ COMMENT ON COLUMN core.cd_user_points.d_date_check IS 'Дата подтверж
 COMMENT ON COLUMN core.cd_user_points.dx_created IS 'Дата записи в БД';
 
 COMMENT ON COLUMN core.cd_user_points.d_date IS 'Дата создания';
-
-COMMENT ON COLUMN core.cd_user_points.c_telephone IS 'Новый номер телефона абонента';
 
 --------------------------------------------------------------------------------
 

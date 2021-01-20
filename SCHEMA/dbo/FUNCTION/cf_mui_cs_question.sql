@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dbo.cf_mui_cs_question(_fn_user integer) RETURNS TABLE(id bigint, c_title text, c_description text, c_text text, n_order integer, dx_created timestamp with time zone, sn_delete boolean, c_role text, n_priority integer)
+CREATE OR REPLACE FUNCTION dbo.cf_mui_cs_question(_fn_user integer, _c_version text) RETURNS TABLE(id bigint, c_title text, c_description text, c_text text, n_order integer, dx_created timestamp with time zone, sn_delete boolean, c_role text, n_priority integer)
     LANGUAGE plpgsql STABLE
     AS $$
 DECLARE
@@ -31,4 +31,4 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION dbo.cf_mui_cs_question(_fn_user integer) OWNER TO mobnius;
+ALTER FUNCTION dbo.cf_mui_cs_question(_fn_user integer, _c_version text) OWNER TO mobnius;

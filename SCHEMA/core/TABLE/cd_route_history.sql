@@ -28,6 +28,10 @@ COMMENT ON COLUMN core.cd_route_history.dx_created IS 'Дата создания
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX cd_route_history_fn_route_idx ON core.cd_route_history USING btree (fn_route);
+
+--------------------------------------------------------------------------------
+
 CREATE TRIGGER cd_route_history_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_route_history
 	FOR EACH ROW

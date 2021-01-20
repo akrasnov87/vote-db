@@ -5,6 +5,9 @@ CREATE OR REPLACE FUNCTION core.sf_update_version() RETURNS text
 * принудительное обновление
 *
 * @returns {text} новая версия базы данных
+*
+* @example
+* [{ "action": "sf_update_version", "method": "Query", "data": [{ "params": [] }], "type": "rpc", "tid": 0 }]
 */
 DECLARE
 	_ver text;

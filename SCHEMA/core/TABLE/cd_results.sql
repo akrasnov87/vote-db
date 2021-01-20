@@ -9,7 +9,12 @@ CREATE TABLE core.cd_results (
 	c_notice text,
 	b_warning boolean DEFAULT false NOT NULL,
 	jb_data jsonb,
-	dx_created timestamp with time zone DEFAULT now()
+	dx_created timestamp with time zone DEFAULT now(),
+	fn_question integer,
+	fn_answer integer,
+	n_order integer NOT NULL,
+	n_rating integer,
+	b_disabled boolean NOT NULL
 );
 
 ALTER TABLE core.cd_results OWNER TO mobnius;

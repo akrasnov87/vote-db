@@ -35,6 +35,13 @@ COMMENT ON COLUMN dbo.cs_question.f_role IS 'Конкретно для указ�
 
 --------------------------------------------------------------------------------
 
+CREATE TRIGGER cs_question_1
+	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_question
+	FOR EACH ROW
+	EXECUTE PROCEDURE core.cft_log_action();
+
+--------------------------------------------------------------------------------
+
 ALTER TABLE dbo.cs_question
 	ADD CONSTRAINT cs_question_pkey PRIMARY KEY (id);
 

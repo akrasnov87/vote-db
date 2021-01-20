@@ -7,12 +7,6 @@ CREATE OR REPLACE FUNCTION core.sf_hard_reset_route(_route_id uuid) RETURNS inte
 * @returns {integer} 0 - маршрут очищен
 */
 BEGIN
-	delete from dbo.ed_output_meter_readings
-	where fn_route = _route_id;
-	
-	delete from dbo.ed_output_conn_seals
-	where fn_route = _route_id;
-	
 	delete from core.cd_files
 	where id IN (select fn_file from core.cd_attachments
 	where fn_route = _route_id);

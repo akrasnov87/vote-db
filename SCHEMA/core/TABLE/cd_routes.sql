@@ -12,7 +12,8 @@ CREATE TABLE core.cd_routes (
 	dx_created timestamp with time zone DEFAULT now(),
 	n_order integer NOT NULL,
 	b_draft boolean DEFAULT false NOT NULL,
-	f_status integer
+	f_status integer,
+	f_house uuid NOT NULL
 );
 
 ALTER TABLE core.cd_routes OWNER TO mobnius;

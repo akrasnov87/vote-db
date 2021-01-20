@@ -1,7 +1,5 @@
 CREATE TABLE dbo.cd_people (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-	f_street uuid NOT NULL,
-	f_house uuid NOT NULL,
 	f_appartament uuid NOT NULL,
 	c_first_name text,
 	c_last_name text,
@@ -18,10 +16,6 @@ CREATE TABLE dbo.cd_people (
 ALTER TABLE dbo.cd_people OWNER TO mobnius;
 
 COMMENT ON TABLE dbo.cd_people IS 'Лояльное население';
-
-COMMENT ON COLUMN dbo.cd_people.f_street IS 'Улица';
-
-COMMENT ON COLUMN dbo.cd_people.f_house IS 'Дом';
 
 COMMENT ON COLUMN dbo.cd_people.f_appartament IS 'Помещение, Квартира';
 
@@ -45,14 +39,6 @@ COMMENT ON COLUMN dbo.cd_people.b_vote_2020 IS 'Голосовавший на в
 
 --------------------------------------------------------------------------------
 
-CREATE INDEX cd_people_f_house_idx ON dbo.cd_people USING btree (f_house);
-
---------------------------------------------------------------------------------
-
-CREATE INDEX cd_people_f_street_idx ON dbo.cd_people USING btree (f_street);
-
---------------------------------------------------------------------------------
-
 CREATE INDEX cd_people_f_type_f_appartament_idx ON dbo.cd_people USING btree (f_type, f_appartament);
 
 --------------------------------------------------------------------------------
@@ -65,6 +51,13 @@ CREATE INDEX cd_people_f_type_idx ON dbo.cd_people USING btree (f_type);
 
 --------------------------------------------------------------------------------
 
+CREATE TRIGGER cd_people_1
+	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cd_people
+	FOR EACH ROW
+	EXECUTE PROCEDURE core.cft_log_action();
+
+--------------------------------------------------------------------------------
+
 ALTER TABLE dbo.cd_people
 	ADD CONSTRAINT cd_people_pkey PRIMARY KEY (id);
 
@@ -72,21 +65,6 @@ ALTER TABLE dbo.cd_people
 
 ALTER TABLE dbo.cd_people
 	ADD CONSTRAINT cd_people_f_appartament FOREIGN KEY (f_appartament) REFERENCES dbo.cs_appartament(id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE dbo.cd_people
-	ADD CONSTRAINT cd_people_f_house FOREIGN KEY (f_house) REFERENCES dbo.cs_house(id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE dbo.cd_people
-	ADD CONSTRAINT cd_people_f_user FOREIGN KEY (f_user) REFERENCES core.pd_users(id);
-
---------------------------------------------------------------------------------
-
-ALTER TABLE dbo.cd_people
-	ADD CONSTRAINT cd_people_f_street FOREIGN KEY (f_street) REFERENCES dbo.cs_street(id);
 
 --------------------------------------------------------------------------------
 

@@ -9,7 +9,8 @@ CREATE TABLE dbo.cs_answer (
 	dx_created timestamp with time zone DEFAULT now() NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
 	c_color text,
-	f_role integer
+	f_role integer,
+	c_const text
 );
 
 ALTER TABLE dbo.cs_answer OWNER TO mobnius;
@@ -38,9 +39,18 @@ COMMENT ON COLUMN dbo.cs_answer.c_color IS '[e05] Цвет';
 
 COMMENT ON COLUMN dbo.cs_answer.f_role IS 'Конкретно для указанной роли';
 
+COMMENT ON COLUMN dbo.cs_answer.c_const IS 'Константа ответа, можно использовать и c_color';
+
 --------------------------------------------------------------------------------
 
 CREATE INDEX cs_answer_color_idx ON dbo.cs_answer USING btree (c_color);
+
+--------------------------------------------------------------------------------
+
+CREATE TRIGGER cs_answer_1
+	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_answer
+	FOR EACH ROW
+	EXECUTE PROCEDURE core.cft_log_action();
 
 --------------------------------------------------------------------------------
 

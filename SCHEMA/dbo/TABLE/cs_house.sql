@@ -58,6 +58,13 @@ CREATE INDEX cs_house_f_subdivision_idx ON dbo.cs_house USING btree (f_subdivisi
 
 --------------------------------------------------------------------------------
 
+CREATE TRIGGER cs_house_1
+	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_house
+	FOR EACH ROW
+	EXECUTE PROCEDURE core.cft_log_action();
+
+--------------------------------------------------------------------------------
+
 ALTER TABLE dbo.cs_house
 	ADD CONSTRAINT cs_house_pkey PRIMARY KEY (id);
 

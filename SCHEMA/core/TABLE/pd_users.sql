@@ -7,16 +7,14 @@ CREATE TABLE core.pd_users (
 	s_salt text,
 	s_hash text,
 	c_first_name text,
-	c_imei text,
 	c_description text,
 	b_disabled boolean DEFAULT false NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
 	c_version text,
 	n_version bigint,
-	c_last_name text,
-	c_middle_name text,
 	c_phone text,
-	c_email text
+	c_email text,
+	n_uik integer
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;
@@ -39,8 +37,6 @@ COMMENT ON COLUMN core.pd_users.s_hash IS 'Hash';
 
 COMMENT ON COLUMN core.pd_users.c_first_name IS 'Имя';
 
-COMMENT ON COLUMN core.pd_users.c_imei IS 'IMEI';
-
 COMMENT ON COLUMN core.pd_users.c_description IS 'Описание';
 
 COMMENT ON COLUMN core.pd_users.b_disabled IS 'Отключен';
@@ -50,10 +46,6 @@ COMMENT ON COLUMN core.pd_users.sn_delete IS 'Удален';
 COMMENT ON COLUMN core.pd_users.c_version IS 'Версия мобильного приложения';
 
 COMMENT ON COLUMN core.pd_users.n_version IS 'Версия мобильного приложения - Число';
-
-COMMENT ON COLUMN core.pd_users.c_last_name IS 'Фамилия';
-
-COMMENT ON COLUMN core.pd_users.c_middle_name IS 'Отчество';
 
 COMMENT ON COLUMN core.pd_users.c_phone IS 'Телефон';
 

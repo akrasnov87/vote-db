@@ -1,6 +1,6 @@
 CREATE VIEW dbo.cv_tracking AS
 	SELECT t.f_user,
-    concat(u.c_last_name, ' ', u.c_first_name, ' ', u.c_middle_name) AS c_name,
+    u.c_first_name AS c_name,
     t.d_date_str,
     t.d_date,
     t.n_longitude,

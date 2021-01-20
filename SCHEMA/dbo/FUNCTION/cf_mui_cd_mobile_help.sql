@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dbo.cf_mui_cd_mobile_help(_fn_user integer) RETURNS TABLE(id uuid, c_key text, c_html text, d_date timestamp with time zone, c_title text)
+CREATE OR REPLACE FUNCTION dbo.cf_mui_cd_mobile_help(_fn_user integer, _c_version text) RETURNS TABLE(id uuid, c_key text, c_html text, d_date timestamp with time zone, c_title text)
     LANGUAGE plpgsql STABLE
     AS $$
 BEGIN
@@ -8,6 +8,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION dbo.cf_mui_cd_mobile_help(_fn_user integer) OWNER TO mobnius;
+ALTER FUNCTION dbo.cf_mui_cd_mobile_help(_fn_user integer, _c_version text) OWNER TO mobnius;
 
-COMMENT ON FUNCTION dbo.cf_mui_cd_mobile_help(_fn_user integer) IS 'Справочная информация для мобильного телефона';
+COMMENT ON FUNCTION dbo.cf_mui_cd_mobile_help(_fn_user integer, _c_version text) IS 'Справочная информация для мобильного телефона';

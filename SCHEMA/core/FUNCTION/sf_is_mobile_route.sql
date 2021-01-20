@@ -5,6 +5,9 @@ CREATE OR REPLACE FUNCTION core.sf_is_mobile_route(_f_route uuid) RETURNS boolea
 * @params {uuid} _f_route - иден. маршрута
 *
 * @returns {boolean} true - маршрут доступен для мобильного устройства
+*
+* @example
+* [{ "action": "sf_is_mobile_route", "method": "Query", "data": [{ "params": [_f_route] }], "type": "rpc", "tid": 0 }]
 */
 BEGIN
 	IF (select count(*) from core.cd_routes as r

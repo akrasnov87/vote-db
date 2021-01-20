@@ -5,6 +5,9 @@ CREATE OR REPLACE FUNCTION core.sf_is_mobile_version_valid(_c_version text) RETU
 * @params {text} _c_version - версия приложения
 *
 * @returns {boolean} true - маршрут доступен для мобильного устройства
+*
+* @example
+* [{ "action": "sf_is_mobile_version_valid", "method": "Query", "data": [{ "params": [_c_version] }], "type": "rpc", "tid": 0 }]
 */
 DECLARE
 	_n_current_version integer;
