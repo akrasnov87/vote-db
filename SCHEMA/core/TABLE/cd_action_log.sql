@@ -12,18 +12,14 @@ ALTER TABLE core.cd_action_log OWNER TO mobnius;
 
 COMMENT ON TABLE core.cd_action_log IS 'Логирование действий пользователей с данными. Полная информация';
 
-COMMENT ON COLUMN core.cd_action_log.c_table_name IS '[e60] имя таблицы в которой произошли изменения';
+COMMENT ON COLUMN core.cd_action_log.c_table_name IS 'Имя таблицы в которой произошли изменения';
 
-COMMENT ON COLUMN core.cd_action_log.c_operation IS '[e50] тип операции, INSERT, UPDATE, DELETE';
+COMMENT ON COLUMN core.cd_action_log.c_operation IS 'Тип операции, INSERT, UPDATE, DELETE';
 
-COMMENT ON COLUMN core.cd_action_log.jb_old_value IS '[e40] предыдущие данные';
+COMMENT ON COLUMN core.cd_action_log.jb_old_value IS 'Предыдущие данные';
 
-COMMENT ON COLUMN core.cd_action_log.jb_new_value IS '[e30] новые данные';
+COMMENT ON COLUMN core.cd_action_log.jb_new_value IS 'Новые данные';
 
-COMMENT ON COLUMN core.cd_action_log.c_user IS '[e20] учетная запись';
+COMMENT ON COLUMN core.cd_action_log.c_user IS 'Учетная запись';
 
-COMMENT ON COLUMN core.cd_action_log.d_date IS '[e10] дата события';
-
---------------------------------------------------------------------------------
-
-CREATE INDEX cd_action_log_c_table_name_c_operation_idx ON core.cd_action_log USING btree (c_table_name, c_operation);
+COMMENT ON COLUMN core.cd_action_log.d_date IS 'Дата события';

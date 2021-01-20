@@ -1,36 +1,36 @@
 CREATE TABLE core.sd_client_errors (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-	c_message text NOT NULL,
-	c_code text NOT NULL,
-	d_created timestamp with time zone NOT NULL,
-	fn_user integer NOT NULL,
-	c_version text NOT NULL,
-	c_platform text NOT NULL,
+	c_message text,
+	c_code text,
+	d_created timestamp with time zone,
+	fn_user integer,
+	c_version text,
+	c_platform text,
 	jb_data jsonb,
-	dx_date timestamp with time zone DEFAULT now() NOT NULL
+	dx_date timestamp with time zone DEFAULT now()
 );
 
 ALTER TABLE core.sd_client_errors OWNER TO mobnius;
 
 COMMENT ON TABLE core.sd_client_errors IS 'Клиентские ошибки';
 
-COMMENT ON COLUMN core.sd_client_errors.id IS '[e90] Идентификатор';
+COMMENT ON COLUMN core.sd_client_errors.id IS 'Идентификатор';
 
-COMMENT ON COLUMN core.sd_client_errors.c_message IS '[e80] Текст ошибки';
+COMMENT ON COLUMN core.sd_client_errors.c_message IS 'Текст ошибки';
 
-COMMENT ON COLUMN core.sd_client_errors.c_code IS '[e70|d] Код ошибки';
+COMMENT ON COLUMN core.sd_client_errors.c_code IS 'Код ошибки';
 
-COMMENT ON COLUMN core.sd_client_errors.d_created IS '[e60] Дата возникновения ошибки';
+COMMENT ON COLUMN core.sd_client_errors.d_created IS 'Дата возникновения ошибки';
 
-COMMENT ON COLUMN core.sd_client_errors.fn_user IS '[e50] Идентификатор пользователя';
+COMMENT ON COLUMN core.sd_client_errors.fn_user IS 'Идентификатор пользователя';
 
-COMMENT ON COLUMN core.sd_client_errors.c_version IS '[e40] Версия приложения';
+COMMENT ON COLUMN core.sd_client_errors.c_version IS 'Версия приложения';
 
-COMMENT ON COLUMN core.sd_client_errors.c_platform IS '[e30] Тип платформы';
+COMMENT ON COLUMN core.sd_client_errors.c_platform IS 'Тип платформы';
 
-COMMENT ON COLUMN core.sd_client_errors.jb_data IS '[e20] Прочии данные';
+COMMENT ON COLUMN core.sd_client_errors.jb_data IS 'Прочии данные';
 
-COMMENT ON COLUMN core.sd_client_errors.dx_date IS '[e10] Дата записи на сервере';
+COMMENT ON COLUMN core.sd_client_errors.dx_date IS 'Дата записи на сервере';
 
 --------------------------------------------------------------------------------
 

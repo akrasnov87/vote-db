@@ -9,28 +9,20 @@ ALTER TABLE core.pd_userinroles OWNER TO mobnius;
 
 COMMENT ON TABLE core.pd_userinroles IS 'Пользователи в ролях';
 
-COMMENT ON COLUMN core.pd_userinroles.id IS '[e40] Идентификатор';
+COMMENT ON COLUMN core.pd_userinroles.id IS 'Идентификатор';
 
-COMMENT ON COLUMN core.pd_userinroles.f_user IS '[e30] Пользователь';
+COMMENT ON COLUMN core.pd_userinroles.f_user IS 'Пользователь';
 
-COMMENT ON COLUMN core.pd_userinroles.f_role IS '[e20] Роль';
+COMMENT ON COLUMN core.pd_userinroles.f_role IS 'Роль';
 
-COMMENT ON COLUMN core.pd_userinroles.sn_delete IS '[e10] Удален';
-
---------------------------------------------------------------------------------
-
-CREATE INDEX pd_userinroles_f_role ON core.pd_userinroles USING btree (f_role);
-
---------------------------------------------------------------------------------
-
-CREATE INDEX pd_userinroles_f_user ON core.pd_userinroles USING btree (f_user);
+COMMENT ON COLUMN core.pd_userinroles.sn_delete IS 'Удален';
 
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER pd_userinroles_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.pd_userinroles
 	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
+	EXECUTE PROCEDURE core.cft_log_action();
 
 --------------------------------------------------------------------------------
 

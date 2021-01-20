@@ -1,5 +1,5 @@
 CREATE SCHEMA public;
 
-ALTER SCHEMA public OWNER TO mobnius;
-
+REVOKE ALL ON SCHEMA public FROM postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
+GRANT ALL ON SCHEMA public TO mobnius;

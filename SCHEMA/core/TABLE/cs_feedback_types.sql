@@ -34,7 +34,7 @@ COMMENT ON COLUMN core.cs_feedback_types.b_disabled IS 'Отключено';
 CREATE TRIGGER cs_feedback_types_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cs_feedback_types
 	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
+	EXECUTE PROCEDURE core.cft_log_action();
 
 --------------------------------------------------------------------------------
 

@@ -10,26 +10,22 @@ ALTER TABLE core.pd_roles OWNER TO mobnius;
 
 COMMENT ON TABLE core.pd_roles IS 'Роли';
 
-COMMENT ON COLUMN core.pd_roles.id IS '[e50] Идентификатор';
+COMMENT ON COLUMN core.pd_roles.id IS 'Идентификатор';
 
-COMMENT ON COLUMN core.pd_roles.c_name IS '[e40|d] Наименование';
+COMMENT ON COLUMN core.pd_roles.c_name IS 'Наименование';
 
-COMMENT ON COLUMN core.pd_roles.c_description IS '[e30] Описание роли';
+COMMENT ON COLUMN core.pd_roles.c_description IS 'Описание роли';
 
-COMMENT ON COLUMN core.pd_roles.n_weight IS '[e20] Приоритет';
+COMMENT ON COLUMN core.pd_roles.n_weight IS 'Приоритет';
 
-COMMENT ON COLUMN core.pd_roles.sn_delete IS '[e10] Удален';
-
---------------------------------------------------------------------------------
-
-CREATE INDEX pd_roles_c_name_idx ON core.pd_roles USING btree (c_name);
+COMMENT ON COLUMN core.pd_roles.sn_delete IS 'Удален';
 
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER pd_roles_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.pd_roles
 	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
+	EXECUTE PROCEDURE core.cft_log_action();
 
 --------------------------------------------------------------------------------
 

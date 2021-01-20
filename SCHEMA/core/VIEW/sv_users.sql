@@ -2,10 +2,19 @@ CREATE VIEW core.sv_users AS
 	SELECT u.id,
     u.f_parent,
     u.c_login,
+    u.c_first_name,
+    u.c_last_name,
+    u.c_middle_name,
+    concat(u.c_first_name, ' ', u.c_last_name, ' ', u.c_middle_name) AS c_user_name,
     u.c_password,
     u.s_salt,
     u.s_hash,
-    concat('.', string_agg(r.c_name, '.'::text), '.') AS c_claims,
+    concat('.', ( SELECT string_agg(t.c_name, '.'::text) AS string_agg
+           FROM ( SELECT r.c_name
+                   FROM (core.pd_userinroles uir
+                     JOIN core.pd_roles r ON ((uir.f_role = r.id)))
+                  WHERE (uir.f_user = u.id)
+                  ORDER BY r.n_weight DESC) t), '.') AS c_claims,
     ( WITH RECURSIVE tab_rec AS (
                  SELECT sd_divisions.id AS id_parent,
                     sd_divisions.id,
@@ -26,19 +35,12 @@ CREATE VIEW core.sv_users AS
                 )
          SELECT string_agg((r_1.id)::text, ','::text) AS string_agg
            FROM tab_rec r_1) AS c_all_divisions,
-    u.b_disabled
-   FROM ((core.pd_users u
-     LEFT JOIN core.pd_userinroles uir ON ((u.id = uir.f_user)))
-     LEFT JOIN ( SELECT pd_roles.id,
-            pd_roles.c_description,
-            pd_roles.c_name,
-            pd_roles.n_weight,
-            pd_roles.sn_delete
-           FROM core.pd_roles
-          ORDER BY pd_roles.n_weight DESC) r ON ((r.id = uir.f_role)))
-  WHERE ((uir.sn_delete = false) AND (u.sn_delete = false) AND (r.sn_delete = false))
-  GROUP BY u.id;
+    u.b_disabled,
+    u.c_version,
+    u.n_version
+   FROM core.pd_users u
+  WHERE (u.sn_delete = false);
 
 ALTER VIEW core.sv_users OWNER TO mobnius;
 
-COMMENT ON VIEW core.sv_users IS 'Закрытый список пользователей';
+COMMENT ON VIEW core.sv_users IS 'Системный список пользователей';

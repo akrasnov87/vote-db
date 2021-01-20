@@ -46,13 +46,6 @@ CREATE INDEX cs_appartament_b_disabled_idx ON dbo.cs_appartament USING btree (b_
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cs_apartment_trigger
-	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_appartament
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE dbo.cs_appartament
 	ADD CONSTRAINT cs_apartment_pkey PRIMARY KEY (id);
 

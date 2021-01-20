@@ -1,6 +1,9 @@
 CREATE OR REPLACE FUNCTION core.sf_get_version() RETURNS text
     LANGUAGE plpgsql STABLE
     AS $$
+/**
+* @returns {text} версия базы данных
+*/
 DECLARE
 	_ver text;
 BEGIN

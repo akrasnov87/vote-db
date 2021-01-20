@@ -4,38 +4,31 @@ CREATE TABLE core.sd_divisions (
 	c_name text NOT NULL,
 	c_dep_code text,
 	n_code integer,
-	b_disabled boolean DEFAULT false NOT NULL,
-	c_email text,
-	c_email_agitator text,
-	c_email_agitator_v2 text
+	b_disabled boolean DEFAULT false NOT NULL
 );
 
 ALTER TABLE core.sd_divisions OWNER TO mobnius;
 
 COMMENT ON TABLE core.sd_divisions IS 'Отделения';
 
-COMMENT ON COLUMN core.sd_divisions.id IS '[e60] Идентификатор';
+COMMENT ON COLUMN core.sd_divisions.id IS 'Идентификатор';
 
-COMMENT ON COLUMN core.sd_divisions.f_division IS '[e50] Вышестоящее отделение';
+COMMENT ON COLUMN core.sd_divisions.f_division IS 'Вышестоящее отделение';
 
-COMMENT ON COLUMN core.sd_divisions.c_name IS '[e40|d] Наименование';
+COMMENT ON COLUMN core.sd_divisions.c_name IS 'Наименование';
 
-COMMENT ON COLUMN core.sd_divisions.c_dep_code IS '[e30] Код отделения (филиала)';
+COMMENT ON COLUMN core.sd_divisions.c_dep_code IS 'Код отделения (филиала)';
 
-COMMENT ON COLUMN core.sd_divisions.n_code IS '[e20] Код';
+COMMENT ON COLUMN core.sd_divisions.n_code IS 'Код';
 
-COMMENT ON COLUMN core.sd_divisions.b_disabled IS '[e10] Отключено';
-
-COMMENT ON COLUMN core.sd_divisions.c_email IS 'Адреса для рассылки отчетов по кандидатам';
-
-COMMENT ON COLUMN core.sd_divisions.c_email_agitator IS 'адреса почты для рассылки отчетов по агитаторам';
+COMMENT ON COLUMN core.sd_divisions.b_disabled IS 'Отключено';
 
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER sd_divisions_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.sd_divisions
 	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
+	EXECUTE PROCEDURE core.cft_log_action();
 
 --------------------------------------------------------------------------------
 

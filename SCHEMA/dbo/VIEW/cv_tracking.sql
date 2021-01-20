@@ -1,11 +1,12 @@
 CREATE VIEW dbo.cv_tracking AS
 	SELECT t.f_user,
+    concat(u.c_last_name, ' ', u.c_first_name, ' ', u.c_middle_name) AS c_name,
     t.d_date_str,
     t.d_date,
     t.n_longitude,
     t.n_latitude,
     t.c_network_status
-   FROM ( SELECT t_1.fn_user AS f_user,
+   FROM (( SELECT t_1.fn_user AS f_user,
             to_char(t_1.d_date, 'dd.MM.YYYY HH24:MI'::text) AS d_date_str,
             max(t_1.d_date) AS d_date,
             avg(t_1.n_longitude) AS n_longitude,
@@ -22,6 +23,7 @@ CREATE VIEW dbo.cv_tracking AS
             'online'::text AS c_network_status
            FROM core.cd_user_points t_1
           WHERE (t_1.n_longitude > (1)::numeric)) t
+     JOIN core.pd_users u ON ((t.f_user = u.id)))
   ORDER BY t.d_date;
 
 ALTER VIEW dbo.cv_tracking OWNER TO mobnius;

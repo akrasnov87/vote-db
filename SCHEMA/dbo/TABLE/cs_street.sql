@@ -32,13 +32,6 @@ CREATE INDEX cs_street_f_division_idx ON dbo.cs_street USING btree (f_division);
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cs_street_trigger
-	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_street
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE dbo.cs_street
 	ADD CONSTRAINT cs_street_pkey PRIMARY KEY (id);
 

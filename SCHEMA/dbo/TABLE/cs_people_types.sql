@@ -31,12 +31,5 @@ COMMENT ON COLUMN dbo.cs_people_types.b_disabled IS '[e10] Отключено';
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cs_people_types_1
-	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_people_types
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE dbo.cs_people_types
 	ADD CONSTRAINT cs_people_types_pkey PRIMARY KEY (id);

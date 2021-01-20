@@ -1,38 +1,38 @@
 CREATE TABLE core.sd_digests (
 	id integer DEFAULT nextval('core.auto_id_sd_digests'::regclass) NOT NULL,
 	c_version text NOT NULL,
-	c_description text NOT NULL,
+	c_description text,
 	f_division integer,
-	c_app_name text NOT NULL,
 	b_hidden boolean DEFAULT false NOT NULL,
 	ba_file bytea NOT NULL,
-	dx_created timestamp with time zone DEFAULT now() NOT NULL
+	dx_created timestamp with time zone DEFAULT now() NOT NULL,
+	n_version bigint
 );
 
 ALTER TABLE core.sd_digests OWNER TO mobnius;
 
 COMMENT ON TABLE core.sd_digests IS 'Журнал версий';
 
-COMMENT ON COLUMN core.sd_digests.id IS '[e60] Идентификатор';
+COMMENT ON COLUMN core.sd_digests.id IS 'Идентификатор';
 
-COMMENT ON COLUMN core.sd_digests.c_version IS '[e50|d] Версия';
+COMMENT ON COLUMN core.sd_digests.c_version IS 'Версия';
 
-COMMENT ON COLUMN core.sd_digests.c_description IS '[e40] Описание';
+COMMENT ON COLUMN core.sd_digests.c_description IS 'Описание';
 
-COMMENT ON COLUMN core.sd_digests.f_division IS '[e30] Отделение';
+COMMENT ON COLUMN core.sd_digests.f_division IS 'Отделение';
 
-COMMENT ON COLUMN core.sd_digests.c_app_name IS '[e20] Имя приложения';
+COMMENT ON COLUMN core.sd_digests.b_hidden IS 'Скрыт';
 
-COMMENT ON COLUMN core.sd_digests.b_hidden IS '[e10] Скрыт';
+COMMENT ON COLUMN core.sd_digests.ba_file IS 'Файл для обновления';
 
-COMMENT ON COLUMN core.sd_digests.ba_file IS '[e05] Файл для обновления';
+COMMENT ON COLUMN core.sd_digests.n_version IS 'Номер версии';
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER sd_digests_1
-	BEFORE INSERT OR UPDATE OR DELETE ON core.sd_digests
+CREATE TRIGGER sd_digests_trigger_iu
+	BEFORE INSERT OR UPDATE ON core.sd_digests
 	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
+	EXECUTE PROCEDURE core.cft_sd_digest_update_version();
 
 --------------------------------------------------------------------------------
 

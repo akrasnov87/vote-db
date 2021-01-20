@@ -44,13 +44,6 @@ CREATE INDEX cs_answer_color_idx ON dbo.cs_answer USING btree (c_color);
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cs_answer_trigger
-	BEFORE INSERT OR UPDATE OR DELETE ON dbo.cs_answer
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE dbo.cs_answer
 	ADD CONSTRAINT cs_answer_pkey PRIMARY KEY (id);
 

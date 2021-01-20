@@ -9,55 +9,50 @@ CREATE TABLE core.cd_routes (
 	b_extended boolean NOT NULL,
 	d_extended date,
 	jb_data jsonb,
-	dx_created timestamp with time zone DEFAULT now() NOT NULL,
+	dx_created timestamp with time zone DEFAULT now(),
 	n_order integer NOT NULL,
-	f_house uuid
+	b_draft boolean DEFAULT false NOT NULL,
+	f_status integer
 );
 
 ALTER TABLE core.cd_routes OWNER TO mobnius;
 
 COMMENT ON TABLE core.cd_routes IS 'Маршруты';
 
-COMMENT ON COLUMN core.cd_routes.id IS '[e120] Идентификатор';
+COMMENT ON COLUMN core.cd_routes.id IS 'Идентификатор';
 
-COMMENT ON COLUMN core.cd_routes.f_type IS '[e110] Тип маршрута';
+COMMENT ON COLUMN core.cd_routes.f_type IS 'Тип маршрута';
 
-COMMENT ON COLUMN core.cd_routes.c_number IS '[e100|d] Номер маршрута';
+COMMENT ON COLUMN core.cd_routes.c_number IS 'Номер маршрута';
 
-COMMENT ON COLUMN core.cd_routes.d_date IS '[e90] Дата создания';
+COMMENT ON COLUMN core.cd_routes.d_date IS 'Дата создания';
 
-COMMENT ON COLUMN core.cd_routes.d_date_start IS '[e80] Дата начала выполнения';
+COMMENT ON COLUMN core.cd_routes.d_date_start IS 'Дата начала выполнения';
 
-COMMENT ON COLUMN core.cd_routes.d_date_end IS '[e70] Дата завершения выполнения';
+COMMENT ON COLUMN core.cd_routes.d_date_end IS 'Дата завершения выполнения';
 
-COMMENT ON COLUMN core.cd_routes.c_notice IS '[e60] Примечание';
+COMMENT ON COLUMN core.cd_routes.c_notice IS 'Примечание';
 
-COMMENT ON COLUMN core.cd_routes.b_extended IS '[e50] Продлен';
+COMMENT ON COLUMN core.cd_routes.b_extended IS 'Продлен';
 
-COMMENT ON COLUMN core.cd_routes.d_extended IS '[e40] Продлен до';
+COMMENT ON COLUMN core.cd_routes.d_extended IS 'Продлен до';
 
-COMMENT ON COLUMN core.cd_routes.jb_data IS '[e30] JSON данные';
+COMMENT ON COLUMN core.cd_routes.jb_data IS 'JSON данные';
 
-COMMENT ON COLUMN core.cd_routes.dx_created IS '[e20] Дата создания в БД';
+COMMENT ON COLUMN core.cd_routes.dx_created IS 'Дата создания в БД';
 
-COMMENT ON COLUMN core.cd_routes.n_order IS '[e10] Сортировка';
+COMMENT ON COLUMN core.cd_routes.n_order IS 'Сортировка';
 
-COMMENT ON COLUMN core.cd_routes.f_house IS 'Ссылка на дом';
+COMMENT ON COLUMN core.cd_routes.b_draft IS 'Является черновиком';
 
---------------------------------------------------------------------------------
-
-CREATE INDEX cd_routes_d_date_end_idx ON core.cd_routes USING btree (d_date_end);
-
---------------------------------------------------------------------------------
-
-CREATE INDEX cd_routes_f_type_idx ON core.cd_routes USING btree (f_type);
+COMMENT ON COLUMN core.cd_routes.f_status IS 'Статус маршрута';
 
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER cd_routes_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_routes
 	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
+	EXECUTE PROCEDURE core.cft_log_action();
 
 --------------------------------------------------------------------------------
 
@@ -72,4 +67,4 @@ ALTER TABLE core.cd_routes
 --------------------------------------------------------------------------------
 
 ALTER TABLE core.cd_routes
-	ADD CONSTRAINT cd_routes_f_house_fkey FOREIGN KEY (f_house) REFERENCES dbo.cs_house(id);
+	ADD CONSTRAINT cd_routes_f_status_fkey FOREIGN KEY (f_status) REFERENCES core.cs_route_statuses(id);

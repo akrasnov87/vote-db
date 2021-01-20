@@ -3,65 +3,75 @@ CREATE TABLE core.pd_users (
 	f_parent integer,
 	c_login text NOT NULL,
 	c_password text,
+	fn_file uuid,
 	s_salt text,
 	s_hash text,
-	c_email text,
-	c_tel text,
+	c_first_name text,
 	c_imei text,
 	c_description text,
 	b_disabled boolean DEFAULT false NOT NULL,
 	sn_delete boolean DEFAULT false NOT NULL,
-	n_uik integer,
-	dx_created timestamp with time zone DEFAULT now() NOT NULL,
-	f_subdivision integer,
-	c_fio text,
-	f_division integer
+	c_version text,
+	n_version bigint,
+	c_last_name text,
+	c_middle_name text,
+	c_phone text,
+	c_email text
 );
 
 ALTER TABLE core.pd_users OWNER TO mobnius;
 
 COMMENT ON TABLE core.pd_users IS 'Пользователи';
 
-COMMENT ON COLUMN core.pd_users.id IS '[e150] Идентификатор';
+COMMENT ON COLUMN core.pd_users.id IS 'Идентификатор';
 
-COMMENT ON COLUMN core.pd_users.f_parent IS '[e140] Ответственный за УИК';
+COMMENT ON COLUMN core.pd_users.f_parent IS 'Родитель';
 
-COMMENT ON COLUMN core.pd_users.c_login IS '[e130|d] Логин';
+COMMENT ON COLUMN core.pd_users.c_login IS 'Логин';
 
-COMMENT ON COLUMN core.pd_users.c_password IS '[e120] Пароль';
+COMMENT ON COLUMN core.pd_users.c_password IS 'Пароль';
 
-COMMENT ON COLUMN core.pd_users.s_salt IS '[e100] Salt';
+COMMENT ON COLUMN core.pd_users.fn_file IS 'Иконка';
 
-COMMENT ON COLUMN core.pd_users.s_hash IS '[e90] Hash';
+COMMENT ON COLUMN core.pd_users.s_salt IS 'Salt';
 
-COMMENT ON COLUMN core.pd_users.c_email IS '[e50] Адрес эл. почты';
+COMMENT ON COLUMN core.pd_users.s_hash IS 'Hash';
 
-COMMENT ON COLUMN core.pd_users.c_tel IS '[e40] Телефон';
+COMMENT ON COLUMN core.pd_users.c_first_name IS 'Имя';
 
-COMMENT ON COLUMN core.pd_users.c_imei IS '[e35] IMEI';
+COMMENT ON COLUMN core.pd_users.c_imei IS 'IMEI';
 
-COMMENT ON COLUMN core.pd_users.c_description IS '[e30] Описание';
+COMMENT ON COLUMN core.pd_users.c_description IS 'Описание';
 
-COMMENT ON COLUMN core.pd_users.b_disabled IS '[e20] Отключен';
+COMMENT ON COLUMN core.pd_users.b_disabled IS 'Отключен';
 
-COMMENT ON COLUMN core.pd_users.sn_delete IS '[e10] Удален';
+COMMENT ON COLUMN core.pd_users.sn_delete IS 'Удален';
 
-COMMENT ON COLUMN core.pd_users.n_uik IS '[e0] УИК';
+COMMENT ON COLUMN core.pd_users.c_version IS 'Версия мобильного приложения';
 
-COMMENT ON COLUMN core.pd_users.f_subdivision IS 'Округ для кандидата';
+COMMENT ON COLUMN core.pd_users.n_version IS 'Версия мобильного приложения - Число';
 
-COMMENT ON COLUMN core.pd_users.c_fio IS 'ФИО';
+COMMENT ON COLUMN core.pd_users.c_last_name IS 'Фамилия';
 
---------------------------------------------------------------------------------
+COMMENT ON COLUMN core.pd_users.c_middle_name IS 'Отчество';
 
-CREATE INDEX pd_users_n_uik_idx ON core.pd_users USING btree (n_uik);
+COMMENT ON COLUMN core.pd_users.c_phone IS 'Телефон';
+
+COMMENT ON COLUMN core.pd_users.c_email IS 'Эл. почта';
 
 --------------------------------------------------------------------------------
 
 CREATE TRIGGER pd_users_1
 	BEFORE INSERT OR UPDATE OR DELETE ON core.pd_users
 	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_0_log_action();
+	EXECUTE PROCEDURE core.cft_log_action();
+
+--------------------------------------------------------------------------------
+
+CREATE TRIGGER pd_users_trigger_iu
+	BEFORE INSERT OR UPDATE ON core.pd_users
+	FOR EACH ROW
+	EXECUTE PROCEDURE core.cft_sd_digest_update_version();
 
 --------------------------------------------------------------------------------
 
