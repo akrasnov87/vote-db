@@ -22,13 +22,6 @@ COMMENT ON COLUMN core.cd_userinroutes.dx_created IS 'Дата создания 
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cd_userinroutes_1
-	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_userinroutes
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE core.cd_userinroutes
 	ADD CONSTRAINT cd_userinroutes_pkey PRIMARY KEY (id);
 

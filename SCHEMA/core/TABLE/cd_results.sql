@@ -45,12 +45,5 @@ COMMENT ON COLUMN core.cd_results.dx_created IS 'Дата создания в Б
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cd_results_1
-	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_results
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE core.cd_results
 	ADD CONSTRAINT cd_results_pkey PRIMARY KEY (id);

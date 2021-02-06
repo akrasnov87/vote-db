@@ -6,8 +6,11 @@ CREATE TABLE dbo.cs_appartament (
 	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	f_user integer,
-	n_signature_2018 integer DEFAULT 0 NOT NULL,
-	f_main_user integer
+	f_manager integer,
+	jkh_premise_link integer,
+	jkh_house_link integer,
+	b_vote_2018 boolean NOT NULL,
+	b_off_range boolean NOT NULL
 );
 
 ALTER TABLE dbo.cs_appartament OWNER TO mobnius;
@@ -24,9 +27,15 @@ COMMENT ON COLUMN dbo.cs_appartament.n_number IS 'Номер';
 
 COMMENT ON COLUMN dbo.cs_appartament.f_user IS 'Агитатор';
 
-COMMENT ON COLUMN dbo.cs_appartament.n_signature_2018 IS 'Подписи в 2018';
+COMMENT ON COLUMN dbo.cs_appartament.f_manager IS 'Ответственный';
 
-COMMENT ON COLUMN dbo.cs_appartament.f_main_user IS 'Ответственный';
+COMMENT ON COLUMN dbo.cs_appartament.jkh_premise_link IS 'Идентификатор квартиры из ГИС ЖКХ';
+
+COMMENT ON COLUMN dbo.cs_appartament.jkh_house_link IS 'Идентификатор дома из ГИС ЖКХ';
+
+COMMENT ON COLUMN dbo.cs_appartament.b_vote_2018 IS 'Есть результат обхода 2018';
+
+COMMENT ON COLUMN dbo.cs_appartament.b_off_range IS 'Вне диапазона квартир';
 
 --------------------------------------------------------------------------------
 
@@ -69,4 +78,4 @@ ALTER TABLE dbo.cs_appartament
 --------------------------------------------------------------------------------
 
 ALTER TABLE dbo.cs_appartament
-	ADD CONSTRAINT cs_apartment_f_main_user_fkey FOREIGN KEY (f_main_user) REFERENCES core.pd_users(id) NOT VALID;
+	ADD CONSTRAINT cs_apartment_f_main_user_fkey FOREIGN KEY (f_manager) REFERENCES core.pd_users(id) NOT VALID;

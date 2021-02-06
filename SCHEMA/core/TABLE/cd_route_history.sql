@@ -32,13 +32,6 @@ CREATE INDEX cd_route_history_fn_route_idx ON core.cd_route_history USING btree 
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cd_route_history_1
-	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_route_history
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_log_action();
-
---------------------------------------------------------------------------------
-
 CREATE TRIGGER cd_route_history_cd_routes_f_history_trigger
 	AFTER INSERT OR UPDATE OR DELETE ON core.cd_route_history
 	FOR EACH ROW

@@ -39,13 +39,6 @@ COMMENT ON COLUMN core.cd_points.n_priority IS 'Приоритет точки, �
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cd_points_1
-	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_points
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE core.cd_points
 	ADD CONSTRAINT cd_points_pkey PRIMARY KEY (id);
 

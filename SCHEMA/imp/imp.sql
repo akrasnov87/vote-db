@@ -1,3 +1,0 @@
-CREATE SCHEMA imp;
-
-ALTER SCHEMA imp OWNER TO mobnius;

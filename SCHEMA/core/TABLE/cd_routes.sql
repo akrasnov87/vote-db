@@ -50,13 +50,6 @@ COMMENT ON COLUMN core.cd_routes.f_status IS 'Статус маршрута';
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cd_routes_1
-	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_routes
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE core.cd_routes
 	ADD CONSTRAINT cd_routes_pkey PRIMARY KEY (id);
 

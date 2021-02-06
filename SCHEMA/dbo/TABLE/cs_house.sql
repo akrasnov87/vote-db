@@ -1,25 +1,26 @@
 CREATE TABLE dbo.cs_house (
 	id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
 	f_street uuid,
-	c_house_num text,
-	c_build_num text,
 	dx_date timestamp with time zone DEFAULT now() NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	n_uik integer,
-	c_floor text,
-	c_porch text,
 	f_subdivision integer,
 	f_user integer,
 	f_candidate_users jsonb,
-	b_correct_uik boolean DEFAULT false NOT NULL,
-	n_uik_correct integer,
 	n_latitude numeric,
 	n_longitude numeric,
-	jb_yandex_res jsonb,
-	c_yandex_description text,
-	c_yandex_name text,
-	b_yandex boolean DEFAULT false NOT NULL,
-	b_yandex_fail boolean DEFAULT false NOT NULL
+	n_building_year smallint,
+	n_lift_count smallint,
+	c_entrance_count text,
+	n_appart_count smallint,
+	s_fias_guid uuid,
+	c_house_corp text,
+	c_house_number text,
+	c_house_litera text,
+	n_count_floor_min text,
+	n_count_floor_max text,
+	jkh_house_link integer,
+	c_full_number text
 );
 
 ALTER TABLE dbo.cs_house OWNER TO mobnius;
@@ -30,23 +31,33 @@ COMMENT ON COLUMN dbo.cs_house.id IS 'Идентификатор';
 
 COMMENT ON COLUMN dbo.cs_house.f_street IS 'Улица';
 
-COMMENT ON COLUMN dbo.cs_house.c_house_num IS 'Номер дома';
-
-COMMENT ON COLUMN dbo.cs_house.c_build_num IS 'Корпус';
-
-COMMENT ON COLUMN dbo.cs_house.c_floor IS 'Кол-во этажей';
-
-COMMENT ON COLUMN dbo.cs_house.c_porch IS 'Кол-во подъездов в доме';
-
 COMMENT ON COLUMN dbo.cs_house.f_candidate_users IS 'Кандидаты';
-
-COMMENT ON COLUMN dbo.cs_house.b_correct_uik IS 'Проводилась проверка на корректность УИК';
-
-COMMENT ON COLUMN dbo.cs_house.n_uik_correct IS 'Скорректированный УИК';
 
 COMMENT ON COLUMN dbo.cs_house.n_latitude IS 'широта';
 
 COMMENT ON COLUMN dbo.cs_house.n_longitude IS 'долгота';
+
+COMMENT ON COLUMN dbo.cs_house.n_building_year IS 'год строения';
+
+COMMENT ON COLUMN dbo.cs_house.n_lift_count IS 'количество лифтов';
+
+COMMENT ON COLUMN dbo.cs_house.c_entrance_count IS 'кол-во подъездов';
+
+COMMENT ON COLUMN dbo.cs_house.n_appart_count IS 'кол-во квартир';
+
+COMMENT ON COLUMN dbo.cs_house.s_fias_guid IS 'ФИАС';
+
+COMMENT ON COLUMN dbo.cs_house.c_house_corp IS 'корпус';
+
+COMMENT ON COLUMN dbo.cs_house.c_house_litera IS 'литерала';
+
+COMMENT ON COLUMN dbo.cs_house.n_count_floor_min IS 'мин. кол-во этажей';
+
+COMMENT ON COLUMN dbo.cs_house.n_count_floor_max IS 'макс. кол-во этажей';
+
+COMMENT ON COLUMN dbo.cs_house.jkh_house_link IS 'Идентификатор дома в ГИС ЖКХ';
+
+COMMENT ON COLUMN dbo.cs_house.c_full_number IS 'Полный номер дома';
 
 --------------------------------------------------------------------------------
 

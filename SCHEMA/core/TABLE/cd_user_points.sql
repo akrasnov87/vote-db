@@ -47,12 +47,5 @@ COMMENT ON COLUMN core.cd_user_points.d_date IS 'Дата создания';
 
 --------------------------------------------------------------------------------
 
-CREATE TRIGGER cd_user_points_1
-	BEFORE INSERT OR UPDATE OR DELETE ON core.cd_user_points
-	FOR EACH ROW
-	EXECUTE PROCEDURE core.cft_log_action();
-
---------------------------------------------------------------------------------
-
 ALTER TABLE core.cd_user_points
 	ADD CONSTRAINT cd_user_points_pkey PRIMARY KEY (id);
